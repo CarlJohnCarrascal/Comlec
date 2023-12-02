@@ -17,7 +17,7 @@ const router = createRouter({
             }
         },
         { 
-            path: '/list', 
+            path: '/voters', 
             component: List,
             meta: {
                 title: 'List',
