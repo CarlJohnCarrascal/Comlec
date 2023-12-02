@@ -6,25 +6,48 @@
                 <thead>
                     <tr class="" style="font-size: small;">
                         <th colspan="8">
-                            <div class="btn-group">
-                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Irosin
-                                </button>
-                                <div class="dropdown-menu">
-                                    <h6 class="dropdown-header">Municipality</h6>
-                                    <a class="dropdown-item">Irosin</a>
-                                    <a class="dropdown-item">Magallanes</a>
+                            <div class="w-100 d-flex justify-content-between">
+                                <div class="d-flex gap-1 flex-wrap">
+                                    <div class="form-group" style="min-width: 120px;">
+                                        <label for="exampleFormControlSelect1">Municipality</label>
+                                        <select class="form-control" id="exampleFormControlSelect1">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" style="min-width: 120px;">
+                                        <label for="exampleFormControlSelect1">Barangay</label>
+                                        <select class="form-control" id="exampleFormControlSelect1">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" style="min-width: 90px;">
+                                        <label for="exampleFormControlSelect1">Purok</label>
+                                        <select class="form-control" id="exampleFormControlSelect1">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </div>
+                                    <div class="d-flex gap-1 form-group "  style="padding-top: 26px;">
+                                        <label for="exampleFormControlSelect1"></label>
+                                        <input type="text" class="form-control" placeholder="Search first, last and middle name" style="height: 31px; min-width: 100px;">
+                                        <a class="btn btn-sm btn-secondary"  style="height: 32px;">Search</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="btn-group ms-1">
-                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Barangay 1
-                                </button>
-                                <div class="dropdown-menu">
-                                    <h6 class="dropdown-header">Brangay</h6>
-                                    <a class="dropdown-item">Barangay 1</a>
-                                    <a class="dropdown-item">Barangay 2</a>
-                                </div>
+                                <!-- <div class="d-flex gap-1">
+                                    <input type="text" class="form-control" placeholder="Search first, last and middle name" style="height: 31px; min-width: 400px;">
+                                    <a class="btn btn-sm btn-secondary">Search</a>
+                                </div> -->
                             </div>
                         </th>
                     </tr>
@@ -121,4 +144,12 @@ let records = [
 
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+
+tbody tr td{
+    padding: .1rem .5rem;
+    vertical-align: middle;
+    font-size: small;
+}
+
+</style>
