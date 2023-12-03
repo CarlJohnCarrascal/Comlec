@@ -1,8 +1,12 @@
 /* @import './base.css'; */
+/* @import 'fontawesome/fontawesome-free/css/fontawesome.min.css';
+@import 'fontawesome/fontawesome-free/css/brands.min.css';
+@import 'fontawesome/fontawesome-free/css/solid.min.css'; */
 
 #app {
   margin: 0 auto;
-  padding: 2rem;
-
   font-weight: normal;
+  overflow: none;
+  height: 100vh;
+  background-color: rgb(204, 204, 204);
 }
