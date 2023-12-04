@@ -10,7 +10,7 @@ const router = createRouter({
         { 
             path: '/',
             alias: '/home' ,
-            component: Home,
+            component: List,
             meta: {
                 title: "Home",
                 button: "btn-home",

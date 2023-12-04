@@ -6,8 +6,9 @@ import { RouterView } from 'vue-router'
   <header class="d-flex justify-content-between border-rounded p-1 py-3">
     <a v-on:click="$router.push('/home')" class="btn ">Menu</a>
     <span>
-      <a v-on:click="$router.push('/home')" class="btn">Home</a>
+      <!-- <a v-on:click="$router.push('/home')" class="btn">Home</a> -->
       <a v-on:click="$router.push('/voters')" class="btn">Voters</a>
+      <a v-on:click="$router.push('/voters')" class="btn">Data Chart</a>
     </span>
   </header>
 
