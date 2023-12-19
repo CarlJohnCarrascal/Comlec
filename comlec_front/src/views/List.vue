@@ -159,9 +159,9 @@
                                 <th scope="col"></th>
                                 <th scope="col">#</th>
                                 <th scope="col">First Name</th>
-                                <th scope="col">Niddle Name</th>
+                                <th scope="col">Middle Name</th>
                                 <th scope="col">Last Name</th>
-                                <th scope="col">Municipal</th>
+                                <th scope="col">Municipality</th>
                                 <th scope="col">Barangay</th>
                                 <th scope="col">Purok</th>
                                 <th scope="col">Mark</th>
@@ -169,50 +169,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr v-for="(record, i = 1) in records">
                                 <td>
                                     <input type="checkbox">
                                 </td>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>Parry</td>
-                                <td>Magallanes</td>
-                                <td>Siuton</td>
-                                <td>Purok 5</td>
-                                <td>Right - Leader</td>
-                                <td class="text-end">
-                                    <a class="btn btn-sm btn-info ms-1">Mark</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox">
-                                </td>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>Norta</td>
-                                <td>Magallanes</td>
-                                <td>Siuton</td>
-                                <td>Purok 3</td>
-                                <td>Left</td>
-                                <td class="text-end">
-                                    <a class="btn btn-sm btn-info ms-1">Mark</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox">
-                                </td>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>Bartsae</td>
-                                <td>Magallanes</td>
-                                <td>Siuton</td>
-                                <td>Purok 5</td>
-                                <td>50/50</td>
+                                <th scope="row">{{ i + 1 }}</th>
+                                <td>{{ record.fname }}</td>
+                                <td>{{ record.mname }}</td>
+                                <td>{{ record.lname }}</td>
+                                <td>{{ record.municipality }}</td>
+                                <td>{{ record.barangay }}</td>
+                                <td>{{ record.purok }}</td>
+                                <td>{{ record.mark}}</td>
                                 <td class="text-end">
                                     <a class="btn btn-sm btn-info ms-1">Mark</a>
                                 </td>
@@ -222,7 +190,7 @@
                             </tr>
                             <tr class="border-none">
                                 <td></td>
-                                <th colspan="1">3</th>
+                                <th colspan="1">{{ records.length }}</th>
                                 <td colspan="9" class="text-end">
                                     <nav aria-label="Page navigation example" class="text-end mt-2">
                                         <ul class="pagination pagination-sm float-end">
@@ -255,14 +223,21 @@
 
 <script setup>
 import $ from 'jquery'
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 let records = [
-    { "check": false, "personalid": 1, "fname": "Jonh", "lname": "DOe", "email": "johndoe@gmail.com" },
-    { "check": false, "personalid": 2, "fname": "WERTW", "lname": "Vetss", "email": "cdsa@gmail.com" },
-    { "check": false, "personalid": 3, "fname": "TERyuu", "lname": "Yuree", "email": "dasdad@gmail.com" }
+    { "check": false, "personalid": 1, "fname": "John", "lname": "Doe", "mname": "Otto", "municipality": "Irosin", "barangay": "Brgy 1", "purok": "Purok 1", "mark": "Leader" },
+    { "check": false, "personalid": 1, "fname": "Mark", "lname": "Doe", "mname": "Parry", "municipality": "Irosin", "barangay": "Brgy 2", "purok": "Purok 1", "mark": "Right" },
+    { "check": false, "personalid": 1, "fname": "Larry", "lname": "Thurn", "mname": "Bartse", "municipality": "Irosin", "barangay": "Brgy 3", "purok": "Purok 1", "mark": "Left" }
 ]
 const isFilterShown = ref(false)
+
+onMounted(()=>{
+    $(document).on("change", "input[type='checkbox']", function() {
+        if(this.checked) $(this).parent().parent().children().addClass("selected")
+        else $(this).parent().parent().children().removeClass("selected")
+    });
+})
 
 function onFilterCollapse() {
     var b = $('#btn-filter-collapse')
@@ -289,4 +264,12 @@ tbody tr td {
 button {
     min-width: 150px;
 }
+
+.selected {
+    background-color: rgb(218, 218, 218);
+}
+.selected td {
+    border: none;
+}
+
 </style>
