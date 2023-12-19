@@ -68,8 +68,8 @@
                         <!-- <div class="d-flex gap-1">
                                     <input type="text" class="form-control" placeholder="Search first, last and middle name" style="height: 31px; min-width: 400px;">
                                     <a class="btn btn-sm btn-secondary">Search</a>
-                                </div> -->
-                    </div>
+                                </div>d -->
+                    </div> 
 
                     <div class="w-100 d-flex justify-content-between mt-4">
                         <div class="d-flex gap-3 flex-wrap">
