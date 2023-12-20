@@ -4,25 +4,25 @@
             <div class="card p-3 overflow-auto">
                 <div class="d-flex justify-content-between flex-wrap">
                     <div class="d-flex gap-1 mb-1">
-                        <button class="btn btn-primary">
+                        <button class="btn btn-sm btn-primary">
                             <i class="fa fa-add"></i>
                             Add Voter
                         </button>
-                        <button class="btn btn-success">
+                        <button class="btn btn-sm btn-success">
                             <i class="fa fa-download"></i>
                             Import Data
                         </button>
-                        <button class="btn btn-secondary">
+                        <!-- <button class="btn btn-sm btn-secondary">
                             <i class="fa fa-upload"></i>
                             Export Data
-                        </button>
+                        </button> -->
                     </div>
                     <div class="d-flex gap-1">
-                        <button class="btn btn-danger">
+                        <button class="btn btn-sm btn-danger">
                             <i class="fa fa-times"></i>
                             Reset Filter
                         </button>
-                        <button v-on:click="onFilterCollapse" id="btn-filter-collapse" class="btn btn-danger"
+                        <button v-on:click="onFilterCollapse" id="btn-filter-collapse" class="btn btn-sm btn-danger"
                             data-bs-toggle="collapse" data-bs-target="#collapse-filter" aria-expanded="false"
                             aria-controls="collapseExample" style="max-width: 50px;min-width: 50px;">
                             <i class="fa fa-chevron-down"></i>
@@ -84,7 +84,9 @@
                                 <input checked type="checkbox" id="voter-left" class="me-2">
                                 <label for="voter-left">Left</label> <br>
                                 <input checked type="checkbox" id="voter-5050" class="me-2">
-                                <label for="voter-5050">50 / 50</label>
+                                <label for="voter-5050">50 / 50</label> <br>
+                                <input checked type="checkbox" id="voter--family-head" class="me-2">
+                                <label for="voter-family-head">House Head Only</label>
                             </div>
                             <!-- <div class="form-group" style="min-width: 200px;">
                                         <label for="exampleFormControlSelect1">Barangay</label>
@@ -123,7 +125,7 @@
                         <caption>List of voters</caption>
                         <thead>
                             <tr class="" style="font-size: small;">
-                                <th colspan="10">
+                                <th colspan="13">
 
                                     <div class="d-flex justify-content-between gap-1 form-group mb-1">
                                        
@@ -154,9 +156,11 @@
                                 </th>
                             </tr>
                         </thead>
-                        <thead>
+                        <thead class=" border">
                             <tr class="" style="font-size: small;">
-                                <th scope="col"></th>
+                                <th scope="col">
+                                    <input type="checkbox" class="select-all" v-model="selectedAll" v-on:change="onSelectAll">
+                                </th>
                                 <th scope="col">#</th>
                                 <th scope="col">First Name</th>
                                 <th scope="col">Middle Name</th>
@@ -164,25 +168,44 @@
                                 <th scope="col">Municipality</th>
                                 <th scope="col">Barangay</th>
                                 <th scope="col">Purok</th>
+                                <th scope="col" class="text-center">House No.</th>
+                                <th scope="col"></th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Mark</th>
                                 <th scope="col" class="text-end">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class=" border">
                             <tr v-for="(record, i = 1) in records">
                                 <td>
-                                    <input type="checkbox">
+                                    <input class="voters-check" type="checkbox" :id="'voters-' + i">
                                 </td>
-                                <th scope="row">{{ i + 1 }}</th>
-                                <td>{{ record.fname }}</td>
-                                <td>{{ record.mname }}</td>
-                                <td>{{ record.lname }}</td>
-                                <td>{{ record.municipality }}</td>
-                                <td>{{ record.barangay }}</td>
-                                <td>{{ record.purok }}</td>
-                                <td>{{ record.mark}}</td>
-                                <td class="text-end">
-                                    <a class="btn btn-sm btn-info ms-1">Mark</a>
+                                <th :for="'voters-'+ i" scope="row">{{ i + 1 }}</th>
+                                <td><label class="w-100" :for="'voters-'+ i">{{ record.fname }}</label></td>
+                                <td><label class="w-100" :for="'voters-'+ i">{{ record.mname }}</label></td>
+                                <td><label class="w-100" :for="'voters-'+ i">{{ record.lname }}</label></td>
+                                <td><label class="w-100" :for="'voters-'+ i">{{ record.municipality }}</label></td>
+                                <td><label class="w-100" :for="'voters-'+ i">{{ record.barangay }}</label></td>
+                                <td><label class="w-100" :for="'voters-'+ i">{{ record.purok }}</label></td>
+                                <td class="text-center"><label class="w-100" :for="'voters-'+ i">1</label></td>
+                                <td class="fs-8" style="font-size: xx-small;"><label class="w-100" :for="'voters-'+ i">House Head</label></td>
+                                <td><label class="w-100" :for="'voters-'+ i"></label></td>
+                                <td><label class="w-100" :for="'voters-'+ i">{{ record.mark}}</label></td>
+                                <td class="" style="min-width: 200px;">
+                                    <div class="d-flex gap-1 justify-content-end">
+                                        <button type="button" class="btn btn-sm btn-info">View Members</button>
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Mark
+                                            </button>
+                                            <ul class="dropdown-menu py-0">
+                                                <li><a class="dropdown-item bg-primary1" href="#">Leader</a></li>
+                                                <li><a class="dropdown-item bg-success1" href="#">Right</a></li>
+                                                <li><a class="dropdown-item bg-danger1" href="#">Left</a></li>
+                                                <li><a class="dropdown-item bg-info1" href="#">50/50</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                             <tr class="d-none">
@@ -191,7 +214,7 @@
                             <tr class="border-none">
                                 <td></td>
                                 <th colspan="1">{{ records.length }}</th>
-                                <td colspan="9" class="text-end">
+                                <td colspan="11" class="text-end">
                                     <nav aria-label="Page navigation example" class="text-end mt-2">
                                         <ul class="pagination pagination-sm float-end">
                                             <li class="page-item">
@@ -225,6 +248,8 @@
 import $ from 'jquery'
 import { onMounted, ref } from 'vue';
 
+const selectedAll = ref(false)
+
 let records = [
     { "check": false, "personalid": 1, "fname": "John", "lname": "Doe", "mname": "Otto", "municipality": "Irosin", "barangay": "Brgy 1", "purok": "Purok 1", "mark": "Leader" },
     { "check": false, "personalid": 1, "fname": "Mark", "lname": "Doe", "mname": "Parry", "municipality": "Irosin", "barangay": "Brgy 2", "purok": "Purok 1", "mark": "Right" },
@@ -234,8 +259,13 @@ const isFilterShown = ref(false)
 
 onMounted(()=>{
     $(document).on("change", "input[type='checkbox']", function() {
-        if(this.checked) $(this).parent().parent().children().addClass("selected")
-        else $(this).parent().parent().children().removeClass("selected")
+        if(this.checked && !this.hasClass('select-all')){
+            $(this).parent().parent().children().addClass("selected")
+        }
+        else {
+            $(this).parent().parent().children().removeClass("selected")
+            selectedAll.value = false
+        }
     });
 })
 
@@ -252,6 +282,21 @@ function onFilterCollapse() {
     }
 }
 
+function onSelectAll(){
+    if(selectedAll.value) {
+        $('.voters-check:checkbox').each(function () {
+            this.checked = true
+            $(this).parent().parent().children().addClass("selected")
+        });
+    }
+    else {
+        $('.voters-check:checkbox').each(function () {
+            this.checked = false
+            $(this).parent().parent().children().removeClass("selected")
+        });
+    }
+}
+
 </script>
 
 <style scoped>
@@ -260,9 +305,15 @@ tbody tr td {
     vertical-align: middle;
     font-size: small;
 }
+tr td label{
+    cursor: pointer;
+}
 
 button {
     min-width: 150px;
+}
+td button {
+    min-width: auto;
 }
 
 .selected {
