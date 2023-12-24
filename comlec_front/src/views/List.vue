@@ -1,154 +1,56 @@
 <template>
     <div class="m-2">
-        <div class="row m-0 mb-3">
-            <div class="card p-3 overflow-auto">
-                <div class="d-flex justify-content-between flex-wrap">
-                    <div class="d-flex gap-1 mb-1">
-                        <button class="btn btn-sm btn-primary">
-                            <i class="fa fa-add"></i>
-                            Add Voter
-                        </button>
-                        <button class="btn btn-sm btn-success">
-                            <i class="fa fa-download"></i>
-                            Import Data
-                        </button>
-                        <!-- <button class="btn btn-sm btn-secondary">
-                            <i class="fa fa-upload"></i>
-                            Export Data
-                        </button> -->
-                    </div>
-                    <div class="d-flex gap-1">
-                        <button class="btn btn-sm btn-danger">
-                            <i class="fa fa-times"></i>
-                            Reset Filter
-                        </button>
-                        <button v-on:click="onFilterCollapse" id="btn-filter-collapse" class="btn btn-sm btn-danger"
-                            data-bs-toggle="collapse" data-bs-target="#collapse-filter" aria-expanded="false"
-                            aria-controls="collapseExample" style="max-width: 50px;min-width: 50px;">
-                            <i class="fa fa-chevron-down"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="row collapse" id="collapse-filter">
-                    <span class="p-3">Filter :</span>
-                    <div class="w-100 d-flex justify-content-between">
-                        <div class="d-flex gap-3 flex-wrap">
-                            <div class="form-group" style="min-width: 200px;">
-                                <label for="exampleFormControlSelect1">Municipality</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option>Sorosgon City</option>
-                                    <option>Irosin</option>
-                                    <option>Magallanes</option>
-                                    <option>Gubat</option>
-                                    <option>Bulan</option>
-                                </select>
-                            </div>
-                            <div class="form-group" style="min-width: 200px;">
-                                <label for="exampleFormControlSelect1">Barangay</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option>Brgy 1</option>
-                                    <option>Brgy 2</option>
-                                    <option>Brgy 3</option>
-                                    <option>Brgy 4</option>
-                                    <option>Brgy 5</option>
-                                </select>
-                            </div>
-                            <div class="form-group" style="min-width: 200px;">
-                                <label for="exampleFormControlSelect1">Purok</label>
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option>Purok 1</option>
-                                    <option>Purok 2</option>
-                                    <option>Purok 3</option>
-                                    <option>Purok 4</option>
-                                    <option>Purok 5</option>
-                                </select>
-                            </div>
-
-                        </div>
-                        <!-- <div class="d-flex gap-1">
-                                    <input type="text" class="form-control" placeholder="Search first, last and middle name" style="height: 31px; min-width: 400px;">
-                                    <a class="btn btn-sm btn-secondary">Search</a>
-                                </div>d -->
-                    </div> 
-
-                    <div class="w-100 d-flex justify-content-between mt-4">
-                        <div class="d-flex gap-3 flex-wrap">
-                            <div class="form-group" style="min-width: 200px;">
-                                <label class="mb-2">Show</label> <br>
-                                <input checked type="checkbox" id="purok-leader" class="me-2">
-                                <label for="purok-leader">All</label> <br>
-                                <input checked type="checkbox" id="purok-leader" class="me-2">
-                                <label for="purok-leader">Purok Leader</label> <br>
-                                <input checked type="checkbox" id="voter-right" class="me-2">
-                                <label for="voter-right">Right</label> <br>
-                                <input checked type="checkbox" id="voter-left" class="me-2">
-                                <label for="voter-left">Left</label> <br>
-                                <input checked type="checkbox" id="voter-5050" class="me-2">
-                                <label for="voter-5050">50 / 50</label> <br>
-                                <input checked type="checkbox" id="voter--family-head" class="me-2">
-                                <label for="voter-family-head">House Head Only</label>
-                            </div>
-                            <!-- <div class="form-group" style="min-width: 200px;">
-                                        <label for="exampleFormControlSelect1">Barangay</label>
-                                        <select class="form-control" id="exampleFormControlSelect1">
-                                        <option>Brgy 1</option>
-                                        <option>Brgy 2</option>
-                                        <option>Brgy 3</option>
-                                        <option>Brgy 4</option>
-                                        <option>Brgy 5</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group" style="min-width: 200px;">
-                                        <label for="exampleFormControlSelect1">Purok</label>
-                                        <select class="form-control" id="exampleFormControlSelect1">
-                                            <option>Purok 1</option>
-                                            <option>Purok 2</option>
-                                            <option>Purok 3</option>
-                                            <option>Purok 4</option>
-                                            <option>Purok 5</option>
-                                        </select>
-                                    </div> -->
-
-                        </div>
-                        <!-- <div class="d-flex gap-1">
-                                    <input type="text" class="form-control" placeholder="Search first, last and middle name" style="height: 31px; min-width: 400px;">
-                                    <a class="btn btn-sm btn-secondary">Search</a>
-                                </div> -->
-                    </div>
-                </div>
+        <div class="row m-0 mb-2 d-none">
+            <div class="card p-2">
+                <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item fw-bold"><a >Voters</a></li>
+                </ol>
+            </nav>
             </div>
         </div>
+        <div class="row m-0 mb-2">
+            <FilterView />
+        </div>
         <div class="row m-0">
-            <div class="card p-3">
+            <div class="card p-2">
                 <div class="table-responsive">
                     <table class="table caption-top px-2">
-                        <caption>List of voters</caption>
+                        <caption class="pt-0 m-2 pb-0">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb mb-0">
+                                    <li v-if="store.state.filter.municipality" class="breadcrumb-item active" aria-current="page">{{store.state.filter.municipality.name}}</li>
+                                    <li v-if="store.state.filter.barangay" class="breadcrumb-item active" aria-current="page">{{store.state.filter.barangay.name}}</li>
+                                    <li v-if="store.state.filter.purok != 'all'" class="breadcrumb-item active" aria-current="page">Purok {{store.state.filter.purok}}</li>
+                                </ol>
+                            </nav>
+                        </caption>
                         <thead>
                             <tr class="" style="font-size: small;">
                                 <th colspan="13">
 
                                     <div class="d-flex justify-content-between gap-1 form-group mb-1">
                                        
-                                        <input type="text" class="form-control"
-                                            placeholder="Search first, last and middle name"
+                                        <input v-model="store.state.filter.search" type="text" class="form-control"
+                                            placeholder="Search first, last or middle name"
                                             style="height: 31px; min-width: 100px; max-width: 500px;">
                                         <!-- <a class="btn btn-sm btn-secondary"  style="height: 32px;">Search</a> -->
                                     </div>
                                     <div class="d-flex justify-content-start gap-1 form-group ">
-                                        <button class="btn btn-sm btn-primary">
+                                        <button v-on:click="onMarkVoters('leader')"  data-bs-toggle="modal" data-bs-target="#confirm-mark-modal" class="btn btn-sm btn-primary">
                                             <i class="fa fa-marker me-2"></i>
                                             Mark Leader
                                         </button>
-                                        <button class="btn btn-sm btn-success">
+                                        <button v-on:click="onMarkVoters('right')"  data-bs-toggle="modal" data-bs-target="#confirm-mark-modal"  class="btn btn-sm btn-success">
                                             <i class="fa fa-marker me-2"></i>
                                             Mark Right
                                         </button>
-                                        <button class="btn btn-sm btn-danger">
+                                        <button v-on:click="onMarkVoters('left')"  data-bs-toggle="modal" data-bs-target="#confirm-mark-modal"  class="btn btn-sm btn-danger">
                                             <i class="fa fa-marker me-2"></i>
                                             Mark Left
                                         </button>
                                         
-                                        <button class="btn btn-sm btn-info">
+                                        <button v-on:click="onMarkVoters('undecided')"  data-bs-toggle="modal" data-bs-target="#confirm-mark-modal"  class="btn btn-sm btn-info">
                                             <i class="fa fa-marker me-2"></i>
                                             Mark 50/50
                                         </button>
@@ -165,8 +67,8 @@
                                 <th scope="col">First Name</th>
                                 <th scope="col">Middle Name</th>
                                 <th scope="col">Last Name</th>
-                                <th scope="col">Municipality</th>
-                                <th scope="col">Barangay</th>
+                                <th scope="col" class="d-none">Municipality</th>
+                                <th scope="col" class="d-none">Barangay</th>
                                 <th scope="col">Purok</th>
                                 <th scope="col" class="text-center">House No.</th>
                                 <th scope="col"></th>
@@ -176,44 +78,44 @@
                             </tr>
                         </thead>
                         <tbody class=" border">
-                            <tr v-for="(record, i = 1) in records">
+                            <tr v-for="(record, i = 1) in store.getters.get_voters">
                                 <td>
-                                    <input class="voters-check" type="checkbox" :id="'voters-' + i">
+                                    <input v-model="record.check" class="voters-check" type="checkbox" :id="'voters-' + i" :data-id="record.id">
                                 </td>
                                 <th :for="'voters-'+ i" scope="row">{{ i + 1 }}</th>
                                 <td><label class="w-100" :for="'voters-'+ i">{{ record.fname }}</label></td>
                                 <td><label class="w-100" :for="'voters-'+ i">{{ record.mname }}</label></td>
                                 <td><label class="w-100" :for="'voters-'+ i">{{ record.lname }}</label></td>
-                                <td><label class="w-100" :for="'voters-'+ i">{{ record.municipality }}</label></td>
-                                <td><label class="w-100" :for="'voters-'+ i">{{ record.barangay }}</label></td>
+                                <td class="d-none"><label class="w-100 " :for="'voters-'+ i">{{ record.municipality }}</label></td>
+                                <td class="d-none"><label class="w-100 " :for="'voters-'+ i">{{ record.barangay }}</label></td>
                                 <td><label class="w-100" :for="'voters-'+ i">{{ record.purok }}</label></td>
-                                <td class="text-center"><label class="w-100" :for="'voters-'+ i">1</label></td>
-                                <td class="fs-8" style="font-size: xx-small;"><label class="w-100" :for="'voters-'+ i">House Head</label></td>
+                                <td class="text-center"><label class="w-100" :for="'voters-'+ i">{{ record.house_number }}</label></td>
+                                <td class="fs-8 text-nowrap" style="font-size: xx-small;"><label v-if="record.isHead" class="w-100" :for="'voters-'+ i">House Head</label></td>
                                 <td><label class="w-100" :for="'voters-'+ i"></label></td>
                                 <td><label class="w-100" :for="'voters-'+ i">{{ record.mark}}</label></td>
                                 <td class="" style="min-width: 200px;">
                                     <div class="d-flex gap-1 justify-content-end">
-                                        <button type="button" class="btn btn-sm btn-info">View Members</button>
+                                        <button type="button" class="btn btn-sm btn-info">Member's</button>
                                         <div class="dropdown">
                                             <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 Mark
                                             </button>
                                             <ul class="dropdown-menu py-0">
-                                                <li><a class="dropdown-item bg-primary1" href="#">Leader</a></li>
-                                                <li><a class="dropdown-item bg-success1" href="#">Right</a></li>
-                                                <li><a class="dropdown-item bg-danger1" href="#">Left</a></li>
-                                                <li><a class="dropdown-item bg-info1" href="#">50/50</a></li>
+                                                <li><a v-on:click="onConfirmMarkVoters2('leader',record)" class="dropdown-item bg-primary1" href="#">Leader</a></li>
+                                                <li><a v-on:click="onConfirmMarkVoters2('right',record)" class="dropdown-item bg-success1" href="#">Right</a></li>
+                                                <li><a v-on:click="onConfirmMarkVoters2('left',record)" class="dropdown-item bg-danger1" href="#">Left</a></li>
+                                                <li><a v-on:click="onConfirmMarkVoters2('undecided',record)" class="dropdown-item bg-info1" href="#">50/50</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="d-none">
-                                <td colspan="10" class="text-center fw-bold" style="font-size: xx-small;">No Record</td>
+                            <tr class="d-nones py-2" v-if="store.state.voters.length <= 0">
+                                <td colspan="15" class="text-center fw-bold py-2" style="font-size: xx-small;">No Record Found</td>
                             </tr>
                             <tr class="border-none">
                                 <td></td>
-                                <th colspan="1">{{ records.length }}</th>
+                                <th colspan="1">{{ store.getters.get_voters.length }}</th>
                                 <td colspan="11" class="text-end">
                                     <nav aria-label="Page navigation example" class="text-end mt-2">
                                         <ul class="pagination pagination-sm float-end">
@@ -241,48 +143,57 @@
                 </div>
             </div>
         </div>
+        <!-- Modals -->
+        <div class="modal fade" tabindex="-1" id="confirm-mark-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Mark as {{ markType.toString().toUpperCase() }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="min-width: auto;"></button>
+                </div>
+                <div class="modal-body overflow-auto" style="max-height: 200px;">
+                    <p>Please click confirm to mark: </p>
+                    <p class="mb-1" v-for="sv in store.getters.get_voters.filter(v => v.check == true)">{{ sv.fname + " " + sv.mname + " " + sv.lname }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button v-on:click="onConfirmMarkVoters" type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirm</button>
+                </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script setup>
 import $ from 'jquery'
 import { onMounted, ref } from 'vue';
-
+import { useStore } from 'vuex';
+import FilterView from './../components/List/Filter.vue'
+const store = useStore()
 const selectedAll = ref(false)
-
-let records = [
-    { "check": false, "personalid": 1, "fname": "John", "lname": "Doe", "mname": "Otto", "municipality": "Irosin", "barangay": "Brgy 1", "purok": "Purok 1", "mark": "Leader" },
-    { "check": false, "personalid": 1, "fname": "Mark", "lname": "Doe", "mname": "Parry", "municipality": "Irosin", "barangay": "Brgy 2", "purok": "Purok 1", "mark": "Right" },
-    { "check": false, "personalid": 1, "fname": "Larry", "lname": "Thurn", "mname": "Bartse", "municipality": "Irosin", "barangay": "Brgy 3", "purok": "Purok 1", "mark": "Left" }
-]
-const isFilterShown = ref(false)
+const markType = ref("")
 
 onMounted(()=>{
     $(document).on("change", "input[type='checkbox']", function() {
-        if(this.checked && !this.hasClass('select-all')){
+        if(this.checked && !$(this).hasClass("select-all")){
             $(this).parent().parent().children().addClass("selected")
         }
-        else {
+        else if(!this.checked && !$(this).hasClass("select-all")) {
             $(this).parent().parent().children().removeClass("selected")
             selectedAll.value = false
         }
     });
 })
 
-function onFilterCollapse() {
-    var b = $('#btn-filter-collapse')
-    if (isFilterShown.value) {
-        isFilterShown.value = false
-        $('#btn-filter-collapse i').addClass('fa-chevron-down')
-        $('#btn-filter-collapse i').removeClass('fa-chevron-up')
-    } else {
-        isFilterShown.value = true
-        $('#btn-filter-collapse i').removeClass('fa-chevron-down')
-        $('#btn-filter-collapse i').addClass('fa-chevron-up')
-    }
-}
+
 
 function onSelectAll(){
+    let data = {
+        check: selectedAll.value,
+        voters: store.getters.get_voters
+    }
+    store.dispatch("selectAllVoters", data)
     if(selectedAll.value) {
         $('.voters-check:checkbox').each(function () {
             this.checked = true
@@ -296,6 +207,27 @@ function onSelectAll(){
         });
     }
 }
+
+function onMarkVoters(type){
+    markType.value = type
+}
+function onConfirmMarkVoters(){
+    let data = {
+        type: markType.value,
+        voters: store.getters.get_voters.filter(v=>v.check)
+    }
+    store.dispatch("markVoters", data)
+}
+
+function onConfirmMarkVoters2(type,voter){
+    let data = {
+        type: type,
+        voters: []
+    }
+    data.voters.push(voter)
+    store.dispatch("markVoters", data)
+}
+
 
 </script>
 
@@ -321,6 +253,10 @@ td button {
 }
 .selected td {
     border: none;
+}
+
+select option {
+    max-height: 300px;
 }
 
 </style>

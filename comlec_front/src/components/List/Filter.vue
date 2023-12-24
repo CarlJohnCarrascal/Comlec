@@ -1,0 +1,203 @@
+<template>
+    <div class="card p-2">
+        <div class="d-flex justify-content-between flex-wrap">
+            <div class="d-flex gap-1 mb-1">
+                <div class="d-none d-md-block">
+                    <div class="w-100 d-flex justify-content-between">
+                        <div class="d-flex gap-3 flex-wrap">
+                            <div class="form-group" style="min-width: 200px;">
+                                <label for="exampleFormControlSelect1">Municipality</label>
+                                <select v-on:change="onSelectMinucipality" v-model="store.state.filter.municipality"
+                                    class="form-control" id="exampleFormControlSelect1">
+                                    <template v-for="(municipality, i) in store.state.municipalities">
+                                        <template>
+                                            <span>{{ i++ }}</span>
+                                        </template>
+                                        <option v-if="i == 0" :value="municipality" selected>{{ municipality.name }}
+                                        </option>
+                                        <option v-else :value="municipality">{{ municipality.name }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div class="form-group" style="min-width: 200px;">
+                                <label for="exampleFormControlSelect1">Barangay</label>
+                                <select v-on:change="onSelectBrgy" v-model="store.state.filter.barangay"
+                                    class="form-control" id="exampleFormControlSelect1">
+                                    <option value="" selected disabled>Choose barangay</option>
+                                    <template v-for="(brgy, i) in store.state.filter.municipality.brgy">
+                                        <option :value="brgy"> {{ brgy.name }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <div v-if="store.state.filter.barangay" class="form-group" style="min-width: 200px;">
+                                <label for="exampleFormControlSelect1">Purok</label>
+                                <select v-model="store.state.filter.purok" class="form-control"
+                                    id="exampleFormControlSelect1">
+                                    <option value="all" selected>All</option>
+                                    <template v-for="i in store.state.filter.barangay.purok">
+                                        <option :value="i">Purok {{ i }}</option>
+                                    </template>
+                                </select>
+                            </div>
+                            <!-- <div v-if="store.state.filter.purok != 'all'" class="form-group" style="min-width: 200px;">
+                                <label for="exampleFormControlSelect1">House No.</label>
+                                <select v-model="store.state.filter.purok" class="form-control"
+                                    id="exampleFormControlSelect1">
+                                    <option value="all" selected>All</option>
+                                    <template v-for="i in store.state.filter.barangay.purok">
+                                        <option :value="i">Purok {{ i }}</option>
+                                    </template>
+                                </select>
+                            </div> -->
+
+                        </div>
+                        <!-- <div class="d-flex gap-1">
+                                        <input type="text" class="form-control" placeholder="Search first, last and middle name" style="height: 31px; min-width: 400px;">
+                                        <a class="btn btn-sm btn-secondary">Search</a>
+                                    </div>d -->
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex gap-1 mb-1">
+                <!-- <button class="btn btn-sm btn-danger" style="max-height: 32px;">
+                    <i class="fa fa-times"></i>
+                    Reset Filter
+                </button> -->
+                <button v-on:click="onFilterCollapse" id="btn-filter-collapse" class="btn btn-sm btn-danger"
+                    data-bs-toggle="collapse" data-bs-target="#collapse-filter" aria-expanded="false"
+                    aria-controls="collapseExample" style="max-width: 50px;min-width: 50px;max-height: 32px;">
+                    <i class="fa fa-chevron-down"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row collapse ms-1" id="collapse-filter">
+            <div class="d-md-none">
+                <!-- <span class="p-3">Filter :</span> -->
+                <div class="w-100 d-flex justify-content-between">
+                    <div class="d-flex gap-3 flex-wrap">
+                        <div class="form-group" style="min-width: 200px;">
+                            <label for="exampleFormControlSelect1">Municipality</label>
+                            <select v-on:change="onSelectMinucipality" v-model="store.state.filter.municipality"
+                                class="form-control" id="exampleFormControlSelect1">
+                                <template v-for="(municipality, i) in store.state.municipalities">
+                                    <template>
+                                        <span>{{ i++ }}</span>
+                                    </template>
+                                    <option v-if="i == 0" :value="municipality" selected>{{ municipality.name }}</option>
+                                    <option v-else :value="municipality">{{ municipality.name }}</option>
+                                </template>
+                            </select>
+                        </div>
+                        <div class="form-group" style="min-width: 200px;">
+                            <label for="exampleFormControlSelect1">Barangay</label>
+                            <select v-on:change="onSelectBrgy" v-model="store.state.filter.barangay" class="form-control"
+                                id="exampleFormControlSelect1">
+                                <option value="" selected disabled>Choose barangay</option>
+                                <template v-for="(brgy, i) in store.state.filter.municipality.brgy">
+                                    <option :value="brgy"> {{ brgy.name }}</option>
+                                </template>
+                            </select>
+                        </div>
+                        <div v-if="store.state.filter.barangay" class="form-group" style="min-width: 200px;">
+                            <label for="exampleFormControlSelect1">Purok</label>
+                            <select v-model="store.state.filter.purok" class="form-control" id="exampleFormControlSelect1">
+                                <option value="all" selected>All</option>
+                                <template v-for="i in store.state.filter.barangay.purok">
+                                    <option :value="i">Purok {{ i }}</option>
+                                </template>
+                            </select>
+                        </div>
+
+                    </div>
+                    <!-- <div class="d-flex gap-1">
+                                        <input type="text" class="form-control" placeholder="Search first, last and middle name" style="height: 31px; min-width: 400px;">
+                                        <a class="btn btn-sm btn-secondary">Search</a>
+                                    </div>d -->
+                </div>
+            </div>
+            <div class="w-100 d-flex justify-content-between mt-4">
+                <div class="d-flex gap-3 flex-wrap">
+                    <div class="form-group" style="min-width: 200px;">
+                        <label class="mb-2">Show</label> <br>
+                        <input v-on:change="onSelectAll" v-model="store.state.filter.show.all" checked type="checkbox"
+                            id="purok-leader" class="me-2">
+                        <label for="purok-leader">All</label> <br>
+                        <input v-model="store.state.filter.show.leader" checked type="checkbox" id="purok-leader"
+                            class="me-2">
+                        <label for="purok-leader">Purok Leader</label> <br>
+                        <input v-model="store.state.filter.show.right" checked type="checkbox" id="voter-right"
+                            class="me-2">
+                        <label for="voter-right">Right</label> <br>
+                        <input v-model="store.state.filter.show.left" checked type="checkbox" id="voter-left" class="me-2">
+                        <label for="voter-left">Left</label> <br>
+                        <input v-model="store.state.filter.show.undecided" checked type="checkbox" id="voter-5050"
+                            class="me-2">
+                        <label for="voter-5050">50 / 50</label> <br>
+                        <input v-model="store.state.filter.show.house_head" type="checkbox" id="voter--family-head"
+                            class="me-2">
+                        <label for="voter-family-head">House Head Only</label>
+                    </div>
+                    <!-- <div class="form-group" style="min-width: 200px;">
+                                        <label for="exampleFormControlSelect1">Barangay</label>
+                                        <select class="form-control" id="exampleFormControlSelect1">
+                                        <option>Brgy 1</option>
+                                        <option>Brgy 2</option>
+                                        <option>Brgy 3</option>
+                                        <option>Brgy 4</option>
+                                        <option>Brgy 5</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" style="min-width: 200px;">
+                                        <label for="exampleFormControlSelect1">Purok</label>
+                                        <select class="form-control" id="exampleFormControlSelect1">
+                                            <option>Purok 1</option>
+                                            <option>Purok 2</option>
+                                            <option>Purok 3</option>
+                                            <option>Purok 4</option>
+                                            <option>Purok 5</option>
+                                        </select>
+                                    </div> -->
+
+                </div>
+                <!-- <div class="d-flex gap-1">
+                                    <input type="text" class="form-control" placeholder="Search first, last and middle name" style="height: 31px; min-width: 400px;">
+                                    <a class="btn btn-sm btn-secondary">Search</a>
+                                </div> -->
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import $ from 'jquery'
+import { onMounted, ref } from 'vue';
+import { useStore } from 'vuex';
+const store = useStore()
+const isFilterShown = ref(false)
+
+function onFilterCollapse() {
+    var b = $('#btn-filter-collapse')
+    if (isFilterShown.value) {
+        isFilterShown.value = false
+        $('#btn-filter-collapse i').addClass('fa-chevron-down')
+        $('#btn-filter-collapse i').removeClass('fa-chevron-up')
+    } else {
+        isFilterShown.value = true
+        $('#btn-filter-collapse i').removeClass('fa-chevron-down')
+        $('#btn-filter-collapse i').addClass('fa-chevron-up')
+    }
+}
+
+function onSelectMinucipality() {
+    store.dispatch("clearBrgySelected")
+}
+function onSelectBrgy() {
+    store.dispatch("clearPurokSelected")
+}
+function onSelectAll() {
+    store.dispatch("onSelectAllFilter")
+}
+
+</script>
+
+<style scoped></style>

@@ -2,6 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import List from '../views/List.vue'
 import Home from '../views/Home.vue'
+import Report from '../views/Report.vue'
+import Map from '../views/Map.vue'
+import ImportVoter from '../views/ImportVoter.vue'
 
 const router = createRouter({
     // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
@@ -10,10 +13,9 @@ const router = createRouter({
         { 
             path: '/',
             alias: '/home' ,
-            component: List,
+            component: Home,
             meta: {
                 title: "Home",
-                button: "btn-home",
             }
         },
         { 
@@ -21,7 +23,27 @@ const router = createRouter({
             component: List,
             meta: {
                 title: 'List',
-                button: "btn-dashboard",
+            }
+        },
+        { 
+            path: '/report', 
+            component: Report,
+            meta: {
+                title: 'Report',
+            }
+        },
+        { 
+            path: '/map', 
+            component: Map,
+            meta: {
+                title: 'Map',
+            }
+        },
+        { 
+            path: '/import-data', 
+            component: ImportVoter,
+            meta: {
+                title: 'Import Data',
             }
         }
       ]
