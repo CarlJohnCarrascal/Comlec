@@ -1,6 +1,14 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import $ from 'jquery'
+import { onMounted, watch } from 'vue';
+import { useRouter } from 'vue-router';
+const router = useRouter()
+onMounted( async ()=>{
+  await router.isReady()
+  let r = router.currentRoute.value.meta.btn
+  onMenuClick(r)
+})
 
 function onMenuClick(e){
   $('a.btn').removeClass('active')

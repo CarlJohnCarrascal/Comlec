@@ -16,6 +16,7 @@ const router = createRouter({
             component: Home,
             meta: {
                 title: "Home",
+                btn: 'home'
             }
         },
         { 
@@ -23,6 +24,7 @@ const router = createRouter({
             component: List,
             meta: {
                 title: 'List',
+                btn: 'list'
             }
         },
         { 
@@ -30,6 +32,7 @@ const router = createRouter({
             component: Report,
             meta: {
                 title: 'Report',
+                btn: 'report'
             }
         },
         { 
@@ -37,6 +40,7 @@ const router = createRouter({
             component: Map,
             meta: {
                 title: 'Map',
+                btn: 'map'
             }
         },
         { 
@@ -44,6 +48,7 @@ const router = createRouter({
             component: ImportVoter,
             meta: {
                 title: 'Import Data',
+                btn: 'import'
             }
         }
       ]
