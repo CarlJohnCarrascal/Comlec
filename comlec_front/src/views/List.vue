@@ -19,9 +19,10 @@
                         <caption class="pt-0 m-2 pb-0">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb mb-0">
-                                    <li v-if="store.state.filter.municipality" class="breadcrumb-item active" aria-current="page">{{store.state.filter.municipality.name}}</li>
-                                    <li v-if="store.state.filter.barangay" class="breadcrumb-item active" aria-current="page">{{store.state.filter.barangay.name}}</li>
+                                    <li v-if="store.state.filter.municipality != 'all'" class="breadcrumb-item active" aria-current="page">{{store.state.filter.municipality}}</li>
+                                    <li v-if="store.state.filter.barangay != 'all'" class="breadcrumb-item active" aria-current="page">{{store.state.filter.barangay}}</li>
                                     <li v-if="store.state.filter.purok != 'all'" class="breadcrumb-item active" aria-current="page">Purok {{store.state.filter.purok}}</li>
+                                    <li v-if="store.state.filter.house_number != 'all'" class="breadcrumb-item active" aria-current="page">House No. {{store.state.filter.house_number}}</li>
                                 </ol>
                             </nav>
                         </caption>
@@ -95,7 +96,7 @@
                                 <td><label class="w-100" :for="'voters-'+ i">{{ record.mark}}</label></td>
                                 <td class="" style="min-width: 200px;">
                                     <div class="d-flex gap-1 justify-content-end">
-                                        <button type="button" class="btn btn-sm btn-info">Member's</button>
+                                        <button type="button" v-on:click="showMember(record)" class="btn btn-sm btn-info">Member's</button>
                                         <div class="dropdown">
                                             <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 Mark
@@ -170,7 +171,9 @@ import $ from 'jquery'
 import { onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
 import FilterView from './../components/List/Filter.vue'
+import { useRouter } from 'vue-router'
 const store = useStore()
+const router = useRouter()
 const selectedAll = ref(false)
 const markType = ref("")
 
@@ -226,6 +229,11 @@ function onConfirmMarkVoters2(type,voter){
     }
     data.voters.push(voter)
     store.dispatch("markVoters", data)
+}
+
+function showMember(hn){
+    store.dispatch("setSelectedHouseNumber", hn)
+    router.push('/voters/members')
 }
 
 

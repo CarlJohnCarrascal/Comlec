@@ -3,24 +3,15 @@ const store = createStore({
     state: {
         filter: {
             city: "Sorsogon",
-            municipality: {
-                name:"Irosin",
-                brgy:[
-                    {name: "Brgy 1", purok: 10},
-                    {name: "Brgy 2", purok: 5},
-                    {name: "Brgy 3", purok: 7},
-                    {name: "Brgy 4", purok: 10},
-                    {name: "Brgy 5", purok: 14},
-                    {name: "Brgy 6", purok: 9},
-                ]
-            },
-            barangay: "",
+            municipality: "",
+            barangay: "all",
             purok: "all",
-            house_number: "",
+            house_number: "all",
             total_page: 1,
             current_page: 1,
             total_item: 1,
             search: "",
+            view_member_id: "",
             show: {
                 all: true,
                 leader: true,
@@ -59,9 +50,465 @@ const store = createStore({
             }
         },
         voters: [
-            { "check": false, "id": 1,"house_number": 1, "fname": "John", "lname": "Doe", "mname": "Otto","city":"Sorsogon", "municipality": "Irosin", "barangay": "Brgy 1", "purok": "1", "mark": "Leader", "isHead": true },
-            { "check": false, "id": 2,"house_number": 1, "fname": "Mark", "lname": "Doe", "mname": "Parry","city":"Sorsogon", "municipality": "Irosin", "barangay": "Brgy 1", "purok": "1", "mark": "Right", "isHead": false },
-            { "check": false, "id": 3,"house_number": 1, "fname": "Larry", "lname": "Thurn", "mname": "Bartse","city":"Sorsogon", "municipality": "Irosin", "barangay": "Brgy 2", "purok": "1", "mark": "Left", "isHead": true }
+            {
+                "check": false,
+                "id": "lqjc63q3n2jc94z5qf9",
+                "house_number": "1",
+                "purok": "1",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "CHARLENE",
+                "mname": "",
+                "lname": "MERCULIO",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": "1"
+            },
+            {
+                "check": false,
+                "id": "lqjc63q3ekon2i6umsa",
+                "house_number": "1",
+                "purok": "1",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "CHERIE ROSE",
+                "mname": "",
+                "lname": "LOPEZ",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": ""
+            },
+            {
+                "check": false,
+                "id": "lqjc63q3u7m17kevd4p",
+                "house_number": "2",
+                "purok": "1",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "RACHEL",
+                "mname": "",
+                "lname": "HIBON",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": "1"
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4rdvzsigbhk",
+                "house_number": "3",
+                "purok": "1",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "DANILO",
+                "mname": "",
+                "lname": "LLUNAR",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": "1"
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4m8z1wwofmm",
+                "house_number": "3",
+                "purok": "1",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "MELONIE",
+                "mname": "",
+                "lname": "LLUNAR",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": ""
+            },
+            {
+                "check": false,
+                "id": "lqjc63q48gymui2emk",
+                "house_number": "3",
+                "purok": "1",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "DAN MARK",
+                "mname": "",
+                "lname": "LLUNAR",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": ""
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4u1d65my5tg8",
+                "house_number": "4",
+                "purok": "1",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "EDWIN",
+                "mname": "",
+                "lname": "LOVERIA",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": "1"
+            },
+            {
+                "check": false,
+                "id": "lqjc63q49ian9y7a1lc",
+                "house_number": "5",
+                "purok": "1",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "ALLAN",
+                "mname": "",
+                "lname": "BALLESTEROS",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": ""
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4s0kj4anf3im",
+                "house_number": "5",
+                "purok": "1",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "MARY ANN",
+                "mname": "",
+                "lname": "LOVERIA",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": ""
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4pj10t3lgfxg",
+                "house_number": "6",
+                "purok": "1",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "LYDIA",
+                "mname": "",
+                "lname": "HABIL",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": "1"
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4loa2c6pqkhs",
+                "house_number": "6",
+                "purok": "1",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "MICHAEL",
+                "mname": "",
+                "lname": "APOLINAR",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": ""
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4dj2q18po90b",
+                "house_number": "6",
+                "purok": "1",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "VERNA",
+                "mname": "",
+                "lname": "HABEL",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": ""
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4g1h7f75jp1s",
+                "house_number": "6",
+                "purok": "2",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "EVELYN",
+                "mname": "",
+                "lname": "QUAREN",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": ""
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4110wqjznv5p",
+                "house_number": "6",
+                "purok": "2",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "CHRISTINE",
+                "mname": "",
+                "lname": "HABIL",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": ""
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4l2660kn5nmq",
+                "house_number": "7",
+                "purok": "2",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "DOMINADOR",
+                "mname": "",
+                "lname": "HAGOS",
+                "suffix": "JR",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": "1"
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4bv0xy9b08ci",
+                "house_number": "7",
+                "purok": "2",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "MARIA LORENA",
+                "mname": "",
+                "lname": "HAGOS",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": ""
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4mvy1nul2ydj",
+                "house_number": "7",
+                "purok": "2",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "DESIREE NICOLE",
+                "mname": "",
+                "lname": "HAGOS",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": ""
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4z9qofcbiixn",
+                "house_number": "8",
+                "purok": "3",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "ROLANDO",
+                "mname": "",
+                "lname": "GONZALES",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": "1"
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4danlo3vukwc",
+                "house_number": "8",
+                "purok": "3",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "JANET",
+                "mname": "",
+                "lname": "GONZALES",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": ""
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4kthnl7ktao",
+                "house_number": "8",
+                "purok": "3",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "JOSEPH",
+                "mname": "",
+                "lname": "GONZALES",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": ""
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4ib1kll4gquo",
+                "house_number": "9",
+                "purok": "3",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "EDEN",
+                "mname": "",
+                "lname": "GUARDACASA",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": "1"
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4d8yvgdpu5lc",
+                "house_number": "10",
+                "purok": "3",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "ELIJA",
+                "mname": "",
+                "lname": "GRINO",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": "1"
+            },
+            {
+                "check": false,
+                "id": "lqjc63q437dbsqp1nms",
+                "house_number": "11",
+                "purok": "3",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "NILO",
+                "mname": "",
+                "lname": "GURAN",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": "1"
+            },
+            {
+                "check": false,
+                "id": "lqjc63q46s2s2hdkeql",
+                "house_number": "11",
+                "purok": "3",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "JOVELYN",
+                "mname": "",
+                "lname": "COSINO",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": ""
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4e237thlr6c",
+                "house_number": "11",
+                "purok": "4",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "NEIL MARK",
+                "mname": "",
+                "lname": "GURAN",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": ""
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4ekz5eweaxjg",
+                "house_number": "11",
+                "purok": "4",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "JOHN PUAL",
+                "mname": "",
+                "lname": "GURAN",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": ""
+            },
+            {
+                "check": false,
+                "id": "lqjc63q4njhepuv5i4",
+                "house_number": "11",
+                "purok": "4",
+                "barangay": "Brgy 1",
+                "municipality": "Irosin",
+                "city": "SORSOGON",
+                "fname": "JUDIT",
+                "mname": "",
+                "lname": "GURAN",
+                "suffix": "",
+                "gender": "",
+                "mark": "",
+                "status": "",
+                "isHead": ""
+            }
         ],
         imported_voters: [],
         city: ["Sorsogon"],
@@ -126,11 +573,20 @@ const store = createStore({
     getters: {
         get_voters (state){
             let list = state.voters.filter(v => {
-                if(v.city == state.filter.city && v.municipality == state.filter.municipality.name)
+                if(v.city.toLowerCase() == state.filter.city.toLowerCase() && 
+                    v.municipality.toLowerCase() == state.filter.municipality.toLowerCase())
                 {
-                    if(state.filter.barangay == "") return false
-                    else if (v.barangay == state.filter.barangay.name && state.filter.purok == "all") return true
-                    else if (v.barangay == state.filter.barangay.name && v.purok == state.filter.purok) return true
+                    // if(state.filter.barangay == "") return false
+                    // else if (v.barangay.toLowerCase() == state.filter.barangay.name.toLowerCase() 
+                    //          && state.filter.purok == "all") return true
+                    // else if (v.barangay.toLowerCase() == state.filter.barangay.name.toLowerCase() 
+                    //          && v.purok == state.filter.purok) return true
+                    // else return false
+
+                    if(state.filter.barangay == "all") return true
+                    else if (v.barangay == state.filter.barangay && state.filter.purok == "all") return true
+                    else if (v.barangay == state.filter.barangay && v.purok == state.filter.purok && state.filter.house_number == "all") return true
+                    else if (v.barangay == state.filter.barangay && v.purok == state.filter.purok && v.house_number == state.filter.house_number) return true
                     else return false
                 }
                 else return false
@@ -170,6 +626,39 @@ const store = createStore({
         },
         get_selected_voters (state){
             return []
+        },
+        get_city (state){
+            return [...new Set( state.voters.map(obj => obj.city)) ];
+        },
+        get_municipality (state){
+            return [...new Set( state.voters.map(obj => obj.municipality)) ];
+        },
+        get_brgy (state){
+            return [...new Set( state.voters.map(obj => {
+                if(obj.municipality.toLowerCase() == state.filter.municipality.toLowerCase()){
+                    return obj.barangay
+                }
+            })) ];
+        },
+        get_purok (state){
+            return [...new Set( state.voters.map(obj => {
+                if(obj.municipality.toLowerCase() == state.filter.municipality.toLowerCase()){
+                    if(obj.barangay.toLowerCase() == state.filter.barangay.toLowerCase()){
+                        return obj.purok
+                    }
+                }
+            })) ];
+        },
+        get_house_number (state) {
+            return [...new Set( state.voters.map(obj => {
+                if(obj.municipality.toLowerCase() == state.filter.municipality.toLowerCase()){
+                    if(obj.barangay.toLowerCase() == state.filter.barangay.toLowerCase()){
+                        if(obj.purok.toLowerCase() == state.filter.purok.toLowerCase()){
+                            return obj.house_number
+                        }
+                    }
+                }
+            }))];
         },
         get_imported_voters (state){
             if(!state.filter2.municipality) return []
@@ -256,10 +745,16 @@ const store = createStore({
     actions: {
         // #region voters
         clearBrgySelected ({state}){
-            state.filter.barangay = ""
+            state.filter.barangay = "all"
+            state.filter.purok = "all"
+            state.filter.house_number = "all"
         },
         clearPurokSelected ({state}){
             state.filter.purok = "all"
+            state.filter.house_number = "all"
+        },
+        clearHouseNoSelected2 ({state}){
+            state.filter.house_number = "all"
         },
         onSelectAllFilter ({state}){
             if(state.filter.show.all){
@@ -285,6 +780,9 @@ const store = createStore({
                     state.voters[find].mark = data.type.toUpperCase()
                 }
             });
+        },
+        setSelectedHouseNumber ({state}, hn){
+            state.filter.view_member_id = hn
         },
         // #endregion
         // #region import data
