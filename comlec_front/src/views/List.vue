@@ -55,6 +55,10 @@
                                             <i class="fa fa-marker me-2"></i>
                                             Mark 50/50
                                         </button>
+                                        <button class="btn btn-sm btn-danger"  data-bs-toggle="modal" data-bs-target="#confirm-delete-modal">
+                                            <i class="fa fa-trash me-2"></i>
+                                            Remove
+                                        </button>
                                     </div>
                                 </th>
                             </tr>
@@ -83,7 +87,7 @@
                                 <td>
                                     <input v-model="record.check" class="voters-check" type="checkbox" :id="'voters-' + i" :data-id="record.id">
                                 </td>
-                                <th :for="'voters-'+ i" scope="row">{{ i + 1 }}</th>
+                                <!-- <th :for="'voters-'+ i" scope="row">{{ (Number((store.state.filter.current_page - 1) * store.state.filter.item_per_page + 1) + i) }}</th> -->
                                 <td><label class="w-100" :for="'voters-'+ i">{{ record.fname }}</label></td>
                                 <td><label class="w-100" :for="'voters-'+ i">{{ record.mname }}</label></td>
                                 <td><label class="w-100" :for="'voters-'+ i">{{ record.lname }}</label></td>
@@ -115,22 +119,27 @@
                                 <td colspan="15" class="text-center fw-bold py-2" style="font-size: xx-small;">No Record Found</td>
                             </tr>
                             <tr class="border-none">
-                                <td></td>
-                                <th colspan="1">{{ store.getters.get_voters.length }}</th>
+                                <td colspan="5"> Showing {{ store.state.filter.showing }} of <span class="fw-bolds">{{ store.state.filter.total_item }} </span> item, <span class="fw-bolds">{{ store.state.filter.total_page }} </span> page's </td>
                                 <td colspan="11" class="text-end">
                                     <nav aria-label="Page navigation example" class="text-end mt-2">
-                                        <ul class="pagination pagination-sm float-end">
+                                        <ul class="pagination pagination-sm float-end mb-2">
                                             <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Previous">
+                                                <a v-on:click="store.dispatch('nextPage', -1)" v-if="store.state.filter.current_page > 1" class="page-link" aria-label="Previous">
                                                     <span aria-hidden="true">&laquo;</span>
                                                     <!-- <span class="sr-only">Previous</span> -->
                                                 </a>
+                                                <a v-else class="page-link disabled" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                    <!-- <span class="sr-only">Next</span> -->
+                                                </a>
                                             </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item"><a class="page-link">{{ store.state.filter.current_page }}</a></li>
                                             <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Next">
+                                                <a v-on:click="store.dispatch('nextPage', 1)" v-if="store.state.filter.current_page < store.state.filter.total_page" class="page-link" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                    <!-- <span class="sr-only">Next</span> -->
+                                                </a>
+                                                <a v-else class="page-link disabled" aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
                                                     <!-- <span class="sr-only">Next</span> -->
                                                 </a>
@@ -154,7 +163,8 @@
                 </div>
                 <div class="modal-body overflow-auto" style="max-height: 200px;">
                     <p>Please click confirm to mark: </p>
-                    <p class="mb-1" v-for="sv in store.getters.get_voters.filter(v => v.check == true)">{{ sv.fname + " " + sv.mname + " " + sv.lname }}</p>
+                    <p class="mb-1" v-for="sv in store.getters.get_voters.filter(v => v.check == true)">
+                        {{ sv.fname + " " + sv.mname + " " + sv.lname }}</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -163,6 +173,26 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" tabindex="-1" id="confirm-delete-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Remove Voter's</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="min-width: auto;"></button>
+                </div>
+                <div class="modal-body overflow-auto" style="max-height: 200px;">
+                    <p>Please click confirm to remove selected voter's: </p>
+                    <p class="mb-1" v-for="sv in store.getters.get_voters.filter(v => v.check == true)">
+                        {{ sv.fname + " " + sv.mname + " " + sv.lname + " | HN# " + sv.house_number + " | " + sv.city + "," + sv.municipality + "," + sv.barangay + ", Purok" + sv.purok }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button v-on:click="onConfirmDelVoters" type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirm</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -237,6 +267,17 @@ function showMember(hn){
 }
 
 
+function onConfirmDelVoters(){
+    let voters = store.getters.get_imported_voters.filter(v=>v.check)
+    store.dispatch("delImportedVoters", voters)
+}
+function onConfirmDelVoters2(id){
+    let voters = store.getters.get_imported_voters.filter(v=>v.id == id)
+    store.dispatch("delImportedVoters", voters)
+}
+
+
+
 </script>
 
 <style scoped>
@@ -250,7 +291,7 @@ tr td label{
 }
 
 button {
-    min-width: 150px;
+    min-width: 120px;
 }
 td button {
     min-width: auto;

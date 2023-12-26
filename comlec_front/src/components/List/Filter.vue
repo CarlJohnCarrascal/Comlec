@@ -49,13 +49,7 @@
                                     </template>
                                 </select>
                             </div>
-
-
                         </div>
-                        <!-- <div class="d-flex gap-1">
-                                        <input type="text" class="form-control" placeholder="Search first, last and middle name" style="height: 31px; min-width: 400px;">
-                                        <a class="btn btn-sm btn-secondary">Search</a>
-                                    </div>d -->
                     </div>
                 </div>
             </div>
@@ -116,10 +110,10 @@
                                     </div>d -->
                 </div>
             </div>
-            <div class="w-100 d-flex justify-content-between mt-4">
+            <div class="w-100 d-flex justify-content-start mt-4">
                 <div class="d-flex gap-3 flex-wrap">
                     <div class="form-group" style="min-width: 200px;">
-                        <label class="mb-2">Show</label> <br>
+                        <label class="mb-1">Filter</label> <br>
                         <input v-on:change="onSelectAll" v-model="store.state.filter.show.all" checked type="checkbox"
                             id="purok-leader" class="me-2">
                         <label for="purok-leader">All</label> <br>
@@ -134,36 +128,25 @@
                         <input v-model="store.state.filter.show.undecided" checked type="checkbox" id="voter-5050"
                             class="me-2">
                         <label for="voter-5050">50 / 50</label> <br>
+                        <input v-model="store.state.filter.show.unmark" checked type="checkbox" id="voter-5050"
+                            class="me-2">
+                        <label for="voter-5050">Not Mark</label> <br>
                         <input v-model="store.state.filter.show.house_head" type="checkbox" id="voter--family-head"
                             class="me-2">
                         <label for="voter-family-head">House Head Only</label>
                     </div>
-                    <!-- <div class="form-group" style="min-width: 200px;">
-                                        <label for="exampleFormControlSelect1">Barangay</label>
-                                        <select class="form-control" id="exampleFormControlSelect1">
-                                        <option>Brgy 1</option>
-                                        <option>Brgy 2</option>
-                                        <option>Brgy 3</option>
-                                        <option>Brgy 4</option>
-                                        <option>Brgy 5</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group" style="min-width: 200px;">
-                                        <label for="exampleFormControlSelect1">Purok</label>
-                                        <select class="form-control" id="exampleFormControlSelect1">
-                                            <option>Purok 1</option>
-                                            <option>Purok 2</option>
-                                            <option>Purok 3</option>
-                                            <option>Purok 4</option>
-                                            <option>Purok 5</option>
-                                        </select>
-                                    </div> -->
-
                 </div>
-                <!-- <div class="d-flex gap-1">
-                                    <input type="text" class="form-control" placeholder="Search first, last and middle name" style="height: 31px; min-width: 400px;">
-                                    <a class="btn btn-sm btn-secondary">Search</a>
-                                </div> -->
+                <div class="form-group" style="min-width: 60px;">
+                            <label for="exampleFormControlSelect1">Show</label>
+                            <select v-model="store.state.filter.item_per_page" class="form-control">
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="500">500</option>
+                                <option value="1000">1000</option>
+                            </select>
+                        </div>
             </div>
         </div>
     </div>

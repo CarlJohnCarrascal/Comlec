@@ -25,7 +25,7 @@
         </div>
         <div class="row m-0">
             <div class="card p-2">
-                <div class="table-responsive">
+                <div class="table-responsive" style="min-height: 100vh;">
                     <table class="table caption-top px-2">
                         <caption class="pt-0 m-2 pb-0">
                             <nav aria-label="breadcrumb">
@@ -62,6 +62,10 @@
                                             <i class="fa fa-marker me-2"></i>
                                             Mark 50/50
                                         </button>
+                                        <button class="btn btn-sm btn-danger"  data-bs-toggle="modal" data-bs-target="#confirm-delete-modal">
+                                            <i class="fa fa-trash me-2"></i>
+                                            Remove
+                                        </button>
                                     </div>
                                 </th>
                             </tr>
@@ -71,7 +75,7 @@
                                 <th scope="col">
                                     <input type="checkbox" class="select-all" v-model="selectedAll" v-on:change="onSelectAll">
                                 </th>
-                                <th scope="col">#</th>
+                                <!-- <th scope="col">#</th> -->
                                 <th scope="col">First Name</th>
                                 <th scope="col">Middle Name</th>
                                 <th scope="col">Last Name</th>
@@ -90,7 +94,7 @@
                                 <td class="input">
                                     <input v-model="record.check" class="voters-check" type="checkbox" :id="'voters-' + i" :data-id="record.id">
                                 </td>
-                                <th scope="row">{{ i + 1 }}</th>
+                                <!-- <th :for="'voters-'+ i" scope="row">{{ (Number((store.state.filter2.current_page - 1) * store.state.filter2.item_per_page + 1) + i) }}</th> -->
                                 <td>{{ record.fname }}</td>
                                 <td>{{ record.mname }}</td>
                                 <td>{{ record.lname }}</td>
@@ -101,7 +105,7 @@
                                 <td class="fs-8 text-nowrap" style="font-size: xx-small;">
                                     <span v-if="record.isHead">House Head</span>
                                 </td>
-                                <td></td>
+                                <td>{{ record.status }}</td>
                                 <td>{{ record.mark}}</td>
                                 <td class="" style="min-width: 200px;">
                                     <div class="item-action d-flex gap-1 justify-content-end">
@@ -115,6 +119,8 @@
                                                 <li><a v-on:click="onConfirmMarkVoters2('right',record.id)" class="dropdown-item bg-success1">Right</a></li>
                                                 <li><a v-on:click="onConfirmMarkVoters2('left',record.id)" class="dropdown-item bg-danger1" >Left</a></li>
                                                 <li><a v-on:click="onConfirmMarkVoters2('undecided',record.id)" class="dropdown-item bg-info1">50/50</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a v-on:click="onConfirmDelVoters2(record.id)" class="dropdown-item text-danger">Remove</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -124,21 +130,28 @@
                                 <td colspan="15" class="text-center fw-bold py-2" style="font-size: xx-small;">No Record Found</td>
                             </tr>
                             <tr class="border-none">
-                                <td></td>
-                                <th colspan="1">{{ store.getters.get_imported_voters.length }}</th>
-                                <td colspan="11" class="text-end">
+                                <td colspan="5"> Total Items {{ store.state.imported_voters.length }}</td>
+                                <td colspan="20" class="text-end">
                                     <div class="row m-0 p-0">
                                         <nav aria-label="Page navigation example" class="text-end mt-2">
                                         <ul class="pagination pagination-sm float-end mb-2">
                                             <li class="page-item">
-                                                <a class="page-link" aria-label="Previous">
+                                                <a v-on:click="store.dispatch('nextPage2', -1)" v-if="store.state.filter2.current_page > 1" class="page-link" aria-label="Previous">
                                                     <span aria-hidden="true">&laquo;</span>
                                                     <!-- <span class="sr-only">Previous</span> -->
                                                 </a>
+                                                <a v-else class="page-link disabled" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                    <!-- <span class="sr-only">Next</span> -->
+                                                </a>
                                             </li>
-                                            <li class="page-item"><a class="page-link">1</a></li>
+                                            <li class="page-item"><a class="page-link">{{ store.state.filter2.current_page }} </a></li>
                                             <li class="page-item">
-                                                <a class="page-link" aria-label="Next">
+                                                <a v-on:click="store.dispatch('nextPage2', 1)" v-if="store.state.filter2.current_page < store.state.filter2.total_page" class="page-link" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                    <!-- <span class="sr-only">Next</span> -->
+                                                </a>
+                                                <a v-else class="page-link disabled" aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
                                                     <!-- <span class="sr-only">Next</span> -->
                                                 </a>
@@ -157,6 +170,28 @@
             </div>
         </div>
         <input class="d-none" type="file" name="importFile" id="import-file" accept=".csv">
+
+        <!-- Modals -->
+        <div class="modal fade" tabindex="-1" id="confirm-delete-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Remove Voter's</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="min-width: auto;"></button>
+                </div>
+                <div class="modal-body overflow-auto" style="max-height: 200px;">
+                    <p>Please click confirm to remove selected voter's: </p>
+                    <p class="mb-1" v-for="sv in store.getters.get_imported_voters.filter(v => v.check == true)">
+                        {{ sv.fname + " " + sv.mname + " " + sv.lname + " | " + sv.house_number }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button v-on:click="onConfirmDelVoters" type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirm</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -218,7 +253,6 @@ function onChooseFile() {
     $('#import-file').click()
 }
 
-
 function onSelectAll(){
     let data = {
         check: selectedAll.value,
@@ -243,6 +277,15 @@ function onConfirmMarkVoters2(type, voter){
     store.dispatch("markVoters22", data)
 }
 
+function onConfirmDelVoters(){
+    let voters = store.getters.get_imported_voters.filter(v=>v.check)
+    store.dispatch("delImportedVoters2", voters)
+}
+function onConfirmDelVoters2(id){
+    let voters = store.getters.get_imported_voters.filter(v=>v.id == id)
+    store.dispatch("delImportedVoters2", voters)
+}
+
 
 </script>
 
@@ -264,7 +307,7 @@ tr[ischeck="true"]{
 }
 
 button {
-    min-width: 150px;
+    min-width: 120px;
 }
 td button {
     min-width: auto;

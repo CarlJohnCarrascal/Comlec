@@ -12,12 +12,15 @@ const store = createStore({
             total_item: 1,
             search: "",
             view_member_id: "",
+            item_per_page: 10,
+            showing: "1 - 10",
             show: {
                 all: true,
                 leader: true,
                 right: true,
                 left: true,
                 undecided: true,
+                unmark: true,
                 house_head: false
             },
         },
@@ -31,12 +34,15 @@ const store = createStore({
             current_page: 1,
             total_item: 1,
             search: "",
+            item_per_page: 10,
+            showing: "1 - 10",
             show: {
                 all: true,
                 leader: true,
                 right: true,
                 left: true,
                 undecided: true,
+                unmark: true,
                 house_head: false
             },
             page: {
@@ -576,13 +582,7 @@ const store = createStore({
                 if(v.city.toLowerCase() == state.filter.city.toLowerCase() && 
                     v.municipality.toLowerCase() == state.filter.municipality.toLowerCase())
                 {
-                    // if(state.filter.barangay == "") return false
-                    // else if (v.barangay.toLowerCase() == state.filter.barangay.name.toLowerCase() 
-                    //          && state.filter.purok == "all") return true
-                    // else if (v.barangay.toLowerCase() == state.filter.barangay.name.toLowerCase() 
-                    //          && v.purok == state.filter.purok) return true
-                    // else return false
-
+                    if(state.filter.city == "") return false
                     if(state.filter.barangay == "all") return true
                     else if (v.barangay == state.filter.barangay && state.filter.purok == "all") return true
                     else if (v.barangay == state.filter.barangay && v.purok == state.filter.purok && state.filter.house_number == "all") return true
@@ -595,24 +595,28 @@ const store = createStore({
             if(!state.filter.show.all){
                 list = list.filter(v => {
                     if(!state.filter.show.leader){
-                        if(v.mark == "Leader") return false
+                        if(v.mark.toLowerCase() == "leader") return false
                     }
                     if(!state.filter.show.right){
-                        if(v.mark == "Right") return false
+                        if(v.mark.toLowerCase() == "right") return false
                     }
                     if(!state.filter.show.left){
-                        if(v.mark == "Left") return false
+                        if(v.mark.toLowerCase() == "left") return false
                     }
                     if(!state.filter.show.undecided){
-                        if(v.mark == "Undecided") return false
+                        if(v.mark.toLowerCase() == "undecided") return false
+                    }
+                    if(!state.filter.show.unmark){
+                        if(v.mark == "") return false
                     }
                     return true
                 })
-            }
-            if(state.filter.show.house_head){
-                list = list.filter(v=> v.isHead)
-            }
 
+                if(state.filter.show.house_head){
+                    list = list.filter(v=> v.isHead)
+                }
+            }
+            
             list = list.filter(v => {
                 if(
                     v.fname.toLowerCase().includes(state.filter.search.toLowerCase()) ||
@@ -622,7 +626,15 @@ const store = createStore({
                 else return false
             })
 
-            return list
+            state.filter.total_item = list.length
+            state.filter.total_page = Math.floor(list.length / state.filter.item_per_page) + 1
+
+            let start = state.filter.item_per_page * (state.filter.current_page - 1)
+            let end = (state.filter.item_per_page * (state.filter.current_page - 1)) + state.filter.item_per_page
+
+            state.filter.showing = (start + 1) + " - " + end
+            //console.log(start, end)
+            return list.slice(start, end)
         },
         get_selected_voters (state){
             return []
@@ -678,24 +690,28 @@ const store = createStore({
             if(!state.filter2.show.all){
                 list = list.filter(v => {
                     if(!state.filter2.show.leader){
-                        if(v.mark == "Leader") return false
+                        if(v.mark.toLowerCase() == "leader") return false
                     }
                     if(!state.filter2.show.right){
-                        if(v.mark == "Right") return false
+                        if(v.mark.toLowerCase() == "right") return false
                     }
                     if(!state.filter2.show.left){
-                        if(v.mark == "Left") return false
+                        if(v.mark.toLowerCase() == "left") return false
                     }
                     if(!state.filter2.show.undecided){
-                        if(v.mark == "Undecided") return false
+                        if(v.mark.toLowerCase() == "undecided") return false
+                    }
+                    if(!state.filter2.show.unmark){
+                        if(v.mark == "") return false
                     }
                     return true
                 })
-            }
-            if(state.filter2.show.house_head){
-                list = list.filter(v=> v.isHead)
-            }
 
+                if(state.filter2.show.house_head){
+                    list = list.filter(v=> v.isHead)
+                }
+            }
+            
             list = list.filter(v => {
                 if(
                     v.fname.toLowerCase().includes(state.filter2.search.toLowerCase()) ||
@@ -705,7 +721,15 @@ const store = createStore({
                 else return false
             })
 
-            return list
+            state.filter2.total_item = list.length
+            state.filter2.total_page = Math.floor(list.length / state.filter2.item_per_page) + 1
+
+            let start = state.filter2.item_per_page * (state.filter2.current_page - 1)
+            let end = (state.filter2.item_per_page * (state.filter2.current_page - 1)) + state.filter2.item_per_page
+
+            state.filter2.showing = (start + 1) + " - " + end
+
+            return list.slice(start, end)
         },
         get_imported_city (state){
             return [...new Set( state.imported_voters.map(obj => obj.city)) ];
@@ -784,12 +808,29 @@ const store = createStore({
         setSelectedHouseNumber ({state}, hn){
             state.filter.view_member_id = hn
         },
+        delImportedVoters ({state}, voters) {
+            voters.forEach(v => {
+                state.voters = state.voters.filter(vv => vv.id != v.id)
+            })
+        },
+        nextPage({state}, i) {
+            state.filter.current_page += i
+        },
         // #endregion
         // #region import data
         setImportedVoters ({state}, data) {
             data.forEach(d => {
                 d.id = Date.now().toString(36) + Math.random().toString(36).substr(2)
                 d.check = false
+                let check_dup = state.voters.find(v => {
+                    if(v.fname.toLowerCase() == d.fname.toLowerCase() 
+                    && v.mname.toLowerCase() == d.mname.toLowerCase()
+                    && v.lname.toLowerCase() == d.lname.toLowerCase()) return true
+                    else return false
+                })
+                if(check_dup) {
+                    d.status = "Duplicate"
+                }
                 state.imported_voters.push(d)
             })
         },
@@ -828,6 +869,14 @@ const store = createStore({
             if(find != -1) {
                 state.imported_voters[find].mark = data.type.toUpperCase()
             }
+        },
+        delImportedVoters2 ({state}, voters) {
+            voters.forEach(v => {
+                state.imported_voters = state.imported_voters.filter(vv => vv.id != v.id)
+            })
+        },
+        nextPage2({state}, i) {
+            state.filter2.current_page += i
         },
         // #endregion
     }
