@@ -808,7 +808,7 @@ const store = createStore({
         setSelectedHouseNumber ({state}, hn){
             state.filter.view_member_id = hn
         },
-        delImportedVoters ({state}, voters) {
+        delVoters ({state}, voters) {
             voters.forEach(v => {
                 state.voters = state.voters.filter(vv => vv.id != v.id)
             })

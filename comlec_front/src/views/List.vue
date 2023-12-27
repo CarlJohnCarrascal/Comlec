@@ -87,7 +87,7 @@
                                 <td>
                                     <input v-model="record.check" class="voters-check" type="checkbox" :id="'voters-' + i" :data-id="record.id">
                                 </td>
-                                <!-- <th :for="'voters-'+ i" scope="row">{{ (Number((store.state.filter.current_page - 1) * store.state.filter.item_per_page + 1) + i) }}</th> -->
+                                <th :for="'voters-'+ i" scope="row">{{ (Number((store.state.filter.current_page - 1) * store.state.filter.item_per_page + 1) + i) }}</th>
                                 <td><label class="w-100" :for="'voters-'+ i">{{ record.fname }}</label></td>
                                 <td><label class="w-100" :for="'voters-'+ i">{{ record.mname }}</label></td>
                                 <td><label class="w-100" :for="'voters-'+ i">{{ record.lname }}</label></td>
@@ -110,6 +110,8 @@
                                                 <li><a v-on:click="onConfirmMarkVoters2('right',record)" class="dropdown-item bg-success1" href="#">Right</a></li>
                                                 <li><a v-on:click="onConfirmMarkVoters2('left',record)" class="dropdown-item bg-danger1" href="#">Left</a></li>
                                                 <li><a v-on:click="onConfirmMarkVoters2('undecided',record)" class="dropdown-item bg-info1" href="#">50/50</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a v-on:click="onConfirmDelVoters2(record.id)" class="dropdown-item text-danger">Remove</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -269,11 +271,11 @@ function showMember(hn){
 
 function onConfirmDelVoters(){
     let voters = store.getters.get_imported_voters.filter(v=>v.check)
-    store.dispatch("delImportedVoters", voters)
+    store.dispatch("delVoters", voters)
 }
 function onConfirmDelVoters2(id){
     let voters = store.getters.get_imported_voters.filter(v=>v.id == id)
-    store.dispatch("delImportedVoters", voters)
+    store.dispatch("delVoters", voters)
 }
 
 
