@@ -84,9 +84,8 @@
                             </select>
                         </div>
                         <div class="form-group" style="min-width: 200px;">
-                            <label for="exampleFormControlSelect1">Barangay</label>
-                            <select v-on:change="onSelectBrgy" v-model="store.state.filter.barangay" class="form-control"
-                                id="exampleFormControlSelect1">
+                            <label>Barangay</label>
+                            <select v-on:change="onSelectBrgy" v-model="store.state.filter.barangay" class="form-control">
                                 <option value="" selected disabled>Choose barangay</option>
                                 <template v-for="(brgy, i) in store.state.filter.municipality.brgy">
                                     <option :value="brgy"> {{ brgy.name }}</option>
@@ -94,15 +93,14 @@
                             </select>
                         </div>
                         <div v-if="store.state.filter.barangay" class="form-group" style="min-width: 200px;">
-                            <label for="exampleFormControlSelect1">Purok</label>
-                            <select v-model="store.state.filter.purok" class="form-control" id="exampleFormControlSelect1">
+                            <label>Purok</label>
+                            <select v-model="store.state.filter.purok" class="form-control">
                                 <option value="all" selected>All</option>
-                                <template v-for="i in store.state.filter.barangay.purok">
-                                    <option :value="i">Purok {{ i }}</option>
+                                <template v-for="ii in store.state.filter.barangay.purok">
+                                    <option :value="ii">Purok {{ ii }}</option>
                                 </template>
                             </select>
                         </div>
-
                     </div>
                     <!-- <div class="d-flex gap-1">
                                         <input type="text" class="form-control" placeholder="Search first, last and middle name" style="height: 31px; min-width: 400px;">

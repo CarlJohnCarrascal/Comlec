@@ -110,7 +110,9 @@
                                                 <li><a v-on:click="onConfirmMarkVoters2('right',record)" class="dropdown-item bg-success1" href="#">Right</a></li>
                                                 <li><a v-on:click="onConfirmMarkVoters2('left',record)" class="dropdown-item bg-danger1" href="#">Left</a></li>
                                                 <li><a v-on:click="onConfirmMarkVoters2('undecided',record)" class="dropdown-item bg-info1" href="#">50/50</a></li>
-                                                <li><hr class="dropdown-divider"></li>
+                                                <!-- <li><hr class="dropdown-divider my-0"></li>
+                                                <li><a v-on:click="onEditVoter(record.id)" class="dropdown-item text-primary">Edit</a></li> -->
+                                                <li><hr class="dropdown-divider my-0"></li>
                                                 <li><a v-on:click="onConfirmDelVoters2(record.id)" class="dropdown-item text-danger">Remove</a></li>
                                             </ul>
                                         </div>
@@ -121,7 +123,13 @@
                                 <td colspan="15" class="text-center fw-bold py-2" style="font-size: xx-small;">No Record Found</td>
                             </tr>
                             <tr class="border-none">
-                                <td colspan="5"> Showing {{ store.state.filter.showing }} of <span class="fw-bolds">{{ store.state.filter.total_item }} </span> item, <span class="fw-bolds">{{ store.state.filter.total_page }} </span> page's </td>
+                                <td colspan="5"> Showing {{ store.state.filter.showing }} of 
+                                    <span class="fw-bolds">{{ store.state.filter.total_item }} </span> 
+                                    item, 
+                                    <span v-if="store.state.filter.total_item > 0" class="fw-bolds">{{ store.state.filter.total_page }} </span>
+                                    <span v-else class="fw-bolds">0 </span>
+                                    page's 
+                                </td>
                                 <td colspan="11" class="text-end">
                                     <nav aria-label="Page navigation example" class="text-end mt-2">
                                         <ul class="pagination pagination-sm float-end mb-2">
@@ -270,11 +278,11 @@ function showMember(hn){
 
 
 function onConfirmDelVoters(){
-    let voters = store.getters.get_imported_voters.filter(v=>v.check)
+    let voters = store.getters.get_voters.filter(v=>v.check)
     store.dispatch("delVoters", voters)
 }
 function onConfirmDelVoters2(id){
-    let voters = store.getters.get_imported_voters.filter(v=>v.id == id)
+    let voters = store.getters.get_voters.filter(v=>v.id == id)
     store.dispatch("delVoters", voters)
 }
 

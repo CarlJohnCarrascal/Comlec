@@ -279,11 +279,11 @@ function onConfirmMarkVoters2(type, voter){
 
 function onConfirmDelVoters(){
     let voters = store.getters.get_imported_voters.filter(v=>v.check)
-    store.dispatch("delImportedVoters2", voters)
+    store.dispatch("delImportedVoters", voters)
 }
 function onConfirmDelVoters2(id){
     let voters = store.getters.get_imported_voters.filter(v=>v.id == id)
-    store.dispatch("delImportedVoters2", voters)
+    store.dispatch("delImportedVoters", voters)
 }
 
 

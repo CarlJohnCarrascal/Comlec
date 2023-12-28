@@ -1,6 +1,14 @@
 import { createStore } from 'vuex'
 const store = createStore({
     state: {
+        forms: {
+            voters: {
+                city: "", municipality: "", barangay: "", purok: "",
+                house_number: "", fname: "", mname: "", lname: "", suffix: "",
+                birthdate: null, gender: "", status: "", mark: "undecided",
+                isHead: false
+            }
+        },
         filter: {
             city: "Sorsogon",
             municipality: "",
@@ -58,7 +66,7 @@ const store = createStore({
         voters: [
             {
                 "check": false,
-                "id": "lqjc63q3n2jc94z5qf9",
+                "id": "lqn5qvzrw1t0y1kiuno",
                 "house_number": "1",
                 "purok": "1",
                 "barangay": "Brgy 1",
@@ -70,12 +78,12 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": "1"
             },
             {
                 "check": false,
-                "id": "lqjc63q3ekon2i6umsa",
+                "id": "lqn5qvzsty8rp421i3g",
                 "house_number": "1",
                 "purok": "1",
                 "barangay": "Brgy 1",
@@ -87,12 +95,12 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": ""
             },
             {
                 "check": false,
-                "id": "lqjc63q3u7m17kevd4p",
+                "id": "lqn5qvzswm22x0b2oo",
                 "house_number": "2",
                 "purok": "1",
                 "barangay": "Brgy 1",
@@ -104,12 +112,12 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": "1"
             },
             {
                 "check": false,
-                "id": "lqjc63q4rdvzsigbhk",
+                "id": "lqn5qvzssib0diljda",
                 "house_number": "3",
                 "purok": "1",
                 "barangay": "Brgy 1",
@@ -121,12 +129,12 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": "1"
             },
             {
                 "check": false,
-                "id": "lqjc63q4m8z1wwofmm",
+                "id": "lqn5qvzseuipz605zgt",
                 "house_number": "3",
                 "purok": "1",
                 "barangay": "Brgy 1",
@@ -138,12 +146,12 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": ""
             },
             {
                 "check": false,
-                "id": "lqjc63q48gymui2emk",
+                "id": "lqn5qvzsybdl1ybdzng",
                 "house_number": "3",
                 "purok": "1",
                 "barangay": "Brgy 1",
@@ -155,12 +163,12 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": ""
             },
             {
                 "check": false,
-                "id": "lqjc63q4u1d65my5tg8",
+                "id": "lqn5qvzsklqk13xsde",
                 "house_number": "4",
                 "purok": "1",
                 "barangay": "Brgy 1",
@@ -172,12 +180,12 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": "1"
             },
             {
                 "check": false,
-                "id": "lqjc63q49ian9y7a1lc",
+                "id": "lqn5qvzslnf23i9dtbs",
                 "house_number": "5",
                 "purok": "1",
                 "barangay": "Brgy 1",
@@ -189,12 +197,12 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": ""
             },
             {
                 "check": false,
-                "id": "lqjc63q4s0kj4anf3im",
+                "id": "lqn5qvzs7ll65qpxrfw",
                 "house_number": "5",
                 "purok": "1",
                 "barangay": "Brgy 1",
@@ -206,12 +214,12 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": ""
             },
             {
                 "check": false,
-                "id": "lqjc63q4pj10t3lgfxg",
+                "id": "lqn5qvzs5dr8q6lw6n",
                 "house_number": "6",
                 "purok": "1",
                 "barangay": "Brgy 1",
@@ -223,12 +231,12 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": "1"
             },
             {
                 "check": false,
-                "id": "lqjc63q4loa2c6pqkhs",
+                "id": "lqn5qvzt05lrelvfh9cw",
                 "house_number": "6",
                 "purok": "1",
                 "barangay": "Brgy 1",
@@ -240,12 +248,12 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": ""
             },
             {
                 "check": false,
-                "id": "lqjc63q4dj2q18po90b",
+                "id": "lqn5qvzt76aw6mofb03",
                 "house_number": "6",
                 "purok": "1",
                 "barangay": "Brgy 1",
@@ -257,13 +265,13 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": ""
             },
             {
                 "check": false,
-                "id": "lqjc63q4g1h7f75jp1s",
-                "house_number": "6",
+                "id": "lqn5qvztapks3vq3cxh",
+                "house_number": "1",
                 "purok": "2",
                 "barangay": "Brgy 1",
                 "municipality": "Irosin",
@@ -274,13 +282,13 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": ""
             },
             {
                 "check": false,
-                "id": "lqjc63q4110wqjznv5p",
-                "house_number": "6",
+                "id": "lqn5qvzt00ie8v83oo4q7",
+                "house_number": "1",
                 "purok": "2",
                 "barangay": "Brgy 1",
                 "municipality": "Irosin",
@@ -291,13 +299,13 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": ""
             },
             {
                 "check": false,
-                "id": "lqjc63q4l2660kn5nmq",
-                "house_number": "7",
+                "id": "lqn5qvzt99a8s5xhs0v",
+                "house_number": "1",
                 "purok": "2",
                 "barangay": "Brgy 1",
                 "municipality": "Irosin",
@@ -308,13 +316,13 @@ const store = createStore({
                 "suffix": "JR",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": "1"
             },
             {
                 "check": false,
-                "id": "lqjc63q4bv0xy9b08ci",
-                "house_number": "7",
+                "id": "lqn5qvztvz8mxdlfjmd",
+                "house_number": "1",
                 "purok": "2",
                 "barangay": "Brgy 1",
                 "municipality": "Irosin",
@@ -325,13 +333,13 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": ""
             },
             {
                 "check": false,
-                "id": "lqjc63q4mvy1nul2ydj",
-                "house_number": "7",
+                "id": "lqn5qvztf5nzrulobf",
+                "house_number": "1",
                 "purok": "2",
                 "barangay": "Brgy 1",
                 "municipality": "Irosin",
@@ -342,13 +350,13 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": ""
             },
             {
                 "check": false,
-                "id": "lqjc63q4z9qofcbiixn",
-                "house_number": "8",
+                "id": "lqn5qvztmmgtymkcqfh",
+                "house_number": "1",
                 "purok": "3",
                 "barangay": "Brgy 1",
                 "municipality": "Irosin",
@@ -359,13 +367,13 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": "1"
             },
             {
                 "check": false,
-                "id": "lqjc63q4danlo3vukwc",
-                "house_number": "8",
+                "id": "lqn5qvzt4xcdlyg4lv",
+                "house_number": "1",
                 "purok": "3",
                 "barangay": "Brgy 1",
                 "municipality": "Irosin",
@@ -376,13 +384,13 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": ""
             },
             {
                 "check": false,
-                "id": "lqjc63q4kthnl7ktao",
-                "house_number": "8",
+                "id": "lqn5qvzt32y3w4d9427",
+                "house_number": "1",
                 "purok": "3",
                 "barangay": "Brgy 1",
                 "municipality": "Irosin",
@@ -393,13 +401,13 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": ""
             },
             {
                 "check": false,
-                "id": "lqjc63q4ib1kll4gquo",
-                "house_number": "9",
+                "id": "lqn5qvztdo3t6z350qk",
+                "house_number": "2",
                 "purok": "3",
                 "barangay": "Brgy 1",
                 "municipality": "Irosin",
@@ -410,13 +418,13 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": "1"
             },
             {
                 "check": false,
-                "id": "lqjc63q4d8yvgdpu5lc",
-                "house_number": "10",
+                "id": "lqn5qvzt1hzkex95qg7",
+                "house_number": "3",
                 "purok": "3",
                 "barangay": "Brgy 1",
                 "municipality": "Irosin",
@@ -427,13 +435,13 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": "1"
             },
             {
                 "check": false,
-                "id": "lqjc63q437dbsqp1nms",
-                "house_number": "11",
+                "id": "lqn5qvztk2a0jxhu1l",
+                "house_number": "3",
                 "purok": "3",
                 "barangay": "Brgy 1",
                 "municipality": "Irosin",
@@ -444,13 +452,13 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": "1"
             },
             {
                 "check": false,
-                "id": "lqjc63q46s2s2hdkeql",
-                "house_number": "11",
+                "id": "lqn5qvzu41jfnq5aost",
+                "house_number": "3",
                 "purok": "3",
                 "barangay": "Brgy 1",
                 "municipality": "Irosin",
@@ -461,13 +469,13 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": ""
             },
             {
                 "check": false,
-                "id": "lqjc63q4e237thlr6c",
-                "house_number": "11",
+                "id": "lqn5qvzuq8ydhyxgtz",
+                "house_number": "1",
                 "purok": "4",
                 "barangay": "Brgy 1",
                 "municipality": "Irosin",
@@ -478,13 +486,13 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": ""
             },
             {
                 "check": false,
-                "id": "lqjc63q4ekz5eweaxjg",
-                "house_number": "11",
+                "id": "lqn5qvzussqei7zlf1",
+                "house_number": "1",
                 "purok": "4",
                 "barangay": "Brgy 1",
                 "municipality": "Irosin",
@@ -495,13 +503,13 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": ""
             },
             {
                 "check": false,
-                "id": "lqjc63q4njhepuv5i4",
-                "house_number": "11",
+                "id": "lqn5qvzu6l3k8ro6rwa",
+                "house_number": "1",
                 "purok": "4",
                 "barangay": "Brgy 1",
                 "municipality": "Irosin",
@@ -512,7 +520,7 @@ const store = createStore({
                 "suffix": "",
                 "gender": "",
                 "mark": "",
-                "status": "",
+                "status": "Duplicate",
                 "isHead": ""
             }
         ],
@@ -611,10 +619,10 @@ const store = createStore({
                     }
                     return true
                 })
+            }
 
-                if(state.filter.show.house_head){
-                    list = list.filter(v=> v.isHead)
-                }
+            if(state.filter.show.house_head){
+                list = list.filter(v=> v.isHead)
             }
             
             list = list.filter(v => {
@@ -630,14 +638,30 @@ const store = createStore({
             state.filter.total_page = Math.floor(list.length / state.filter.item_per_page) + 1
 
             let start = state.filter.item_per_page * (state.filter.current_page - 1)
-            let end = (state.filter.item_per_page * (state.filter.current_page - 1)) + state.filter.item_per_page
-
-            state.filter.showing = (start + 1) + " - " + end
-            //console.log(start, end)
+            let end = Number(state.filter.item_per_page * (state.filter.current_page - 1)) + Number(state.filter.item_per_page)
+            let e2 = end
+            if(end > state.filter.total_item) e2 = state.filter.total_item
+            if(state.filter.total_item == 0){
+                start = -1
+                end = 0
+                e2 = 0
+            }
+            state.filter.showing = (start + 1) + " - " + e2
             return list.slice(start, end)
         },
         get_selected_voters (state){
             return []
+        },
+        get_members (state) {
+            console.log(state.filter.view_member_id.house_number)
+            return state.voters.filter(v=> {
+                if(v.house_number == state.filter.view_member_id.house_number 
+                    && v.city.toLowerCase() == state.filter.view_member_id.city.toLowerCase()
+                    && v.municipality.toLowerCase() == state.filter.view_member_id.municipality.toLowerCase()
+                    && v.barangay.toLowerCase() == state.filter.view_member_id.barangay.toLowerCase()
+                    && v.purok == state.filter.view_member_id.purok) return true
+            })
+
         },
         get_city (state){
             return [...new Set( state.voters.map(obj => obj.city)) ];
@@ -662,7 +686,8 @@ const store = createStore({
             })) ];
         },
         get_house_number (state) {
-            return [...new Set( state.voters.map(obj => {
+            let list = []
+            list = [...new Set( state.voters.map(obj => {
                 if(obj.municipality.toLowerCase() == state.filter.municipality.toLowerCase()){
                     if(obj.barangay.toLowerCase() == state.filter.barangay.toLowerCase()){
                         if(obj.purok.toLowerCase() == state.filter.purok.toLowerCase()){
@@ -670,7 +695,8 @@ const store = createStore({
                         }
                     }
                 }
-            }))];
+            }))]
+            return list.filter(v => v != null)
         },
         get_imported_voters (state){
             if(!state.filter2.municipality) return []
@@ -763,7 +789,7 @@ const store = createStore({
                     }
                 }
             }))];
-        }
+        },
     },
     mutations: {},
     actions: {
@@ -809,6 +835,7 @@ const store = createStore({
             state.filter.view_member_id = hn
         },
         delVoters ({state}, voters) {
+            console.log(voters, state.voters)
             voters.forEach(v => {
                 state.voters = state.voters.filter(vv => vv.id != v.id)
             })
@@ -870,7 +897,7 @@ const store = createStore({
                 state.imported_voters[find].mark = data.type.toUpperCase()
             }
         },
-        delImportedVoters2 ({state}, voters) {
+        delImportedVoters ({state}, voters) {
             voters.forEach(v => {
                 state.imported_voters = state.imported_voters.filter(vv => vv.id != v.id)
             })
