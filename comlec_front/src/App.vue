@@ -21,8 +21,9 @@ function onMenuClick(e){
     <a v-on:click="$router.push('/home')" class="btn p-1"></a>
     <span>
       <!-- <a v-on:click="$router.push('/home')" class="btn">Home</a> -->
-      <a v-on:click="$router.push('/home'); onMenuClick('home')" class="btn btn-home py-2 px-3"><i class="fa fa-house me-2"></i>Home</a>
+      <!-- <a v-on:click="$router.push('/home'); onMenuClick('home')" class="btn btn-home py-2 px-3"><i class="fa fa-house me-2"></i>Home</a> -->
       <a v-on:click="$router.push('/voters'); onMenuClick('voters')" class="btn btn-voters active py-2 px-3"><i class="fa fa-users me-2"></i>Voters</a>
+      <a v-on:click="$router.push('/houses'); onMenuClick('house')" class="btn btn-house py-2 px-3"><i class="fa fa-house-user me-2"></i>Houses</a>
       <a v-on:click="$router.push('/report'); onMenuClick('report')" class="btn btn-report py-2 px-3"><i class="fa fa-chart-line me-2"></i>Reports</a>
       <a v-on:click="$router.push('/map'); onMenuClick('map')" class="btn btn-map py-2 px-3"><i class="fa fa-map me-2"></i>Map</a>
       <a v-on:click="$router.push('/import-data'); onMenuClick('import')" class="btn btn-import py-2 px-3"><i class="fa fa-upload me-2"></i>Import Data</a>

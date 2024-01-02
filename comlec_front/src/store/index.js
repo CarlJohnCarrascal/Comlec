@@ -568,7 +568,20 @@ const store = createStore({
                     {name: "Brgy 6", purok: 9},
                 ]
             },
-        ]
+        ],
+        houses: [],
+        house_filter: {
+            city: "",
+            municipality: "",
+            barangay: "",
+            purok: "",
+            house_number: "",
+            total_page: 1,
+            current_page: 1,
+            total_item: 1,
+            search: "",
+            view_member_id: "",
+        },
     },
     getters: {
         get_voters (state){
@@ -739,7 +752,55 @@ const store = createStore({
                     }
                 }
             }))];
+        },
+        // #region Houses
+        get_houses (state) {
+
+        },
+        get_municipality_houses (state) {
+            return [...new Set( state.voters.map(obj => {
+                if(obj.city.toLowerCase() == state.house_filter.city.toLowerCase()){
+                    return obj.municipality
+                }
+            }))];
+        },
+        get_brgy_houses (state) {
+            return [...new Set( state.voters.map(obj => {
+                if(obj.city.toLowerCase() == state.house_filter.city.toLowerCase() &&
+                obj.municipality.toLowerCase() == state.house_filter.municipality.toLowerCase()){
+                    return obj.barangay
+                }
+            }))];
+        },
+        get_purok_houses (state) {
+            return [...new Set( state.voters.map(obj => {
+                if(obj.city.toLowerCase() == state.house_filter.city.toLowerCase() &&
+                obj.municipality.toLowerCase() == state.house_filter.municipality.toLowerCase() &&
+                obj.barangay.toLowerCase() == state.house_filter.barangay.toLowerCase()){
+                    return obj.purok
+                }
+            }))];
+        },
+        get_house_houses (state) {
+            let list = [...new Set( state.voters.map(obj => {
+                if(obj.city.toLowerCase() == state.house_filter.city.toLowerCase() &&
+                obj.municipality.toLowerCase() == state.house_filter.municipality.toLowerCase() &&
+                obj.barangay.toLowerCase() == state.house_filter.barangay.toLowerCase() &&
+                obj.purok.toLowerCase() == state.house_filter.purok.toLowerCase()){
+                    return obj
+                }
+            }))];
+            let list2 = list.filter(v => v.isHead)
+            return [...new Set(list2.map(o => {
+                return {
+                    check: false,
+                    hn: o.house_number,
+                    hh: o.fname + ' ' + o.mname + ' ' + o.lname,
+                    hm: list.filter(v => v.house_number ==  o.house_number).length
+                }
+            }))]
         }
+        // ##endrgion
     },
     mutations: {},
     actions: {

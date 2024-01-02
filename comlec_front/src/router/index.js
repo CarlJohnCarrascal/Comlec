@@ -6,6 +6,7 @@ import Report from '../views/Report.vue'
 import Map from '../views/Map.vue'
 import ImportVoter from '../views/ImportVoter.vue'
 import MemberView from '../views/Member.vue'
+import Houses from '../views/Houses.vue'
 
 const router = createRouter({
     // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
@@ -14,10 +15,10 @@ const router = createRouter({
         { 
             path: '/',
             alias: '/home' ,
-            component: Home,
+            component: List,
             meta: {
                 title: "Home",
-                btn: 'home'
+                btn: 'voters'
             }
         },
         { 
@@ -50,6 +51,14 @@ const router = createRouter({
             meta: {
                 title: 'Map',
                 btn: 'map'
+            }
+        },
+        { 
+            path: '/houses', 
+            component: Houses,
+            meta: {
+                title: 'House',
+                btn: 'house'
             }
         },
         { 
