@@ -45,8 +45,6 @@
             </div>
         </div>
 
-        {{ store.getters.get_house_houses }}
-
         <div class="row m-0">
             <div class="card p-2">
                 <div class="table-responsive">

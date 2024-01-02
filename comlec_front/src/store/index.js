@@ -65,7 +65,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": "1"
+                "isHead": true
             },
             {
                 "check": false,
@@ -82,7 +82,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": ""
+                "isHead": false
             },
             {
                 "check": false,
@@ -99,7 +99,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": "1"
+                "isHead": true
             },
             {
                 "check": false,
@@ -116,7 +116,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": "1"
+                "isHead": true
             },
             {
                 "check": false,
@@ -133,7 +133,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": ""
+                "isHead": false
             },
             {
                 "check": false,
@@ -150,7 +150,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": ""
+                "isHead": false
             },
             {
                 "check": false,
@@ -167,7 +167,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": "1"
+                "isHead": true
             },
             {
                 "check": false,
@@ -184,7 +184,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": ""
+                "isHead": false
             },
             {
                 "check": false,
@@ -201,7 +201,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": ""
+                "isHead": false
             },
             {
                 "check": false,
@@ -218,7 +218,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": "1"
+                "isHead": true
             },
             {
                 "check": false,
@@ -235,7 +235,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": ""
+                "isHead": false
             },
             {
                 "check": false,
@@ -252,7 +252,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": ""
+                "isHead": false
             },
             {
                 "check": false,
@@ -269,7 +269,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": ""
+                "isHead": false
             },
             {
                 "check": false,
@@ -286,7 +286,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": ""
+                "isHead": false
             },
             {
                 "check": false,
@@ -303,7 +303,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": "1"
+                "isHead": true
             },
             {
                 "check": false,
@@ -320,7 +320,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": ""
+                "isHead": false
             },
             {
                 "check": false,
@@ -337,7 +337,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": ""
+                "isHead": false
             },
             {
                 "check": false,
@@ -354,7 +354,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": "1"
+                "isHead": true
             },
             {
                 "check": false,
@@ -371,7 +371,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": ""
+                "isHead": false
             },
             {
                 "check": false,
@@ -388,7 +388,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": ""
+                "isHead": false
             },
             {
                 "check": false,
@@ -405,7 +405,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": "1"
+                "isHead": true
             },
             {
                 "check": false,
@@ -422,7 +422,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": "1"
+                "isHead": true
             },
             {
                 "check": false,
@@ -439,7 +439,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": "1"
+                "isHead": true
             },
             {
                 "check": false,
@@ -456,7 +456,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": ""
+                "isHead": false
             },
             {
                 "check": false,
@@ -473,7 +473,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": ""
+                "isHead": false
             },
             {
                 "check": false,
@@ -490,7 +490,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": ""
+                "isHead": false
             },
             {
                 "check": false,
@@ -507,7 +507,7 @@ const store = createStore({
                 "gender": "",
                 "mark": "",
                 "status": "",
-                "isHead": ""
+                "isHead": false
             }
         ],
         imported_voters: [],
@@ -790,7 +790,9 @@ const store = createStore({
                     return obj
                 }
             }))];
-            let list2 = list.filter(v => v.isHead)
+            list = list.filter(v => v != undefined)
+            if (list[0] == undefined) return []
+            let list2 = list.filter(v => v.isHead )
             return [...new Set(list2.map(o => {
                 return {
                     check: false,
