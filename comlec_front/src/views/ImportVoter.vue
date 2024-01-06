@@ -13,7 +13,7 @@
             <div class="card px-0">
                 <div class="card-header">
                     <div class="w-100 d-flex gap-2 justify-content-end">
-                        <button class="btn btn-sm btn-primary"><i class="fa fa-add me-2"></i> Add</button>
+                        <!-- <button class="btn btn-sm btn-primary"><i class="fa fa-add me-2"></i> Add</button> -->
                         <button v-on:click="onChooseFile" class="btn btn-sm btn-secondary"><i class="fa fa-upload me-2"></i>
                             Import CSV</button>
                     </div>

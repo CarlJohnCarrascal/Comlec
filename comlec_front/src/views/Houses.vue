@@ -1,10 +1,14 @@
 <template>
     <div class="m-2">
+        <div class="row m-2 mt-3 ms-0">
+            <h5>Houses</h5>
+        </div>
         <div class="row m-0 mb-2">
             <div class="card px-0">
                 <div class="card-header">
                     <div class="w-100 d-flex gap-2 justify-content-end">
-                        <button class="btn btn-sm btn-primary"><i class="fa fa-add me-2"></i> Add House</button>
+                        <button v-on:click="$router.push('/house/new')" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-add me-2"></i> New House</button>
+                        <!-- <button v-on:click="addNewMember" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addMemberModal"><i class="fa fa-add me-2"></i> Add Member</button> -->
                     </div>
                 </div>
             </div>
@@ -17,26 +21,26 @@
                         <li class="breadcrumb-item fw-bold"><a>Choose location</a></li>
                         <li class="breadcrumb-item fw-bold">
                             <select v-model="store.state.house_filter.city">
-                                <option value="" selected disabled>City</option>
+                                <option value="" selected disabled>Choose City</option>
                                 <option v-for="c in store.getters.get_city" :value="c">{{ c }}</option>
                             </select>
                         </li>
                         <li v-if="store.state.house_filter.city != ''" class="breadcrumb-item fw-bold">
                             <select v-model="store.state.house_filter.municipality">
-                                <option value="" selected disabled>Municipality</option>
+                                <option value="" selected disabled>Choose Municipality</option>
                                 <option v-for="c in store.getters.get_municipality_houses" :value="c">{{ c }}</option>
                             </select>
                         </li>
                         <li v-if="store.state.house_filter.municipality != ''" class="breadcrumb-item fw-bold">
                             <select v-model="store.state.house_filter.barangay">
-                                <option value="" selected disabled>Barangay</option>
+                                <option value="" selected disabled>Choose Barangay</option>
                                 <option v-for="c in store.getters.get_brgy_houses" :value="c">{{ c }}</option>
                             </select>
                         </li>
                         <li v-if="store.state.house_filter.barangay != ''" class="breadcrumb-item fw-bold">
                             <select v-model="store.state.house_filter.purok">
-                                <option value="" selected disabled>Purok</option>
-                                <option v-for="c in store.getters.get_purok_houses" :value="c">{{ c }}</option>
+                                <option value="" selected disabled>Choose Purok</option>
+                                <option v-for="c in store.getters.get_purok_houses" :value="c">Purok {{ c }}</option>
                             </select>
                         </li>
                     </ol>
@@ -54,9 +58,9 @@
                                 <th scope="col">
                                     <input type="checkbox" class="select-all" v-model="selectedAll" v-on:change="onSelectAll">
                                 </th>
-                                <th scope="col">House #</th>
-                                <th scope="col">House Head</th>
-                                <th scope="col">Member</th>
+                                <th class="text-center" scope="col">House No.</th>
+                                <th scope="col">Family Head</th>
+                                <th class="text-center" scope="col">Member</th>
                                 <th scope="col" class="text-end"></th>
                             </tr>
                         </thead>
@@ -65,12 +69,12 @@
                                 <td class="input">
                                     <input v-model="record.check" class="voters-check" type="checkbox" :id="'voters-' + i" :data-id="record.hn">
                                 </td>
-                                <th scope="row">{{ record.hn }}</th>
+                                <th class="text-center" scope="row">{{ record.hn }}</th>
                                 <td>{{ record.hh }}</td>
                                 <td class="text-center">{{ record.hm }}</td>
                                 <td class="" style="min-width: 200px;">
                                     <div class="item-action d-flex gap-1 justify-content-end">
-                                        <button type="button" class="btn btn-sm btn-info">View</button>
+                                        <button v-on:click="$router.push('/house/member'), store.dispatch('setSelectedHouse', record.hn)" type="button" class="btn btn-sm btn-info">View</button>
                                     </div>
                                 </td>
                             </tr>
@@ -110,6 +114,9 @@
                 </div>
             </div>
         </div>
+
+        //add member modal
+        <AddMember />
     </div>
 </template>
 
@@ -117,6 +124,7 @@
 import { onMounted, ref, watch, computed } from 'vue'
 import $ from 'jquery'
 import { useStore } from 'vuex';
+import AddMember from '../components/House/AddMember.vue';
 
 const store = useStore()
 
@@ -158,6 +166,10 @@ function onConfirmMarkVoters2(type, voter){
         id: voter
     }
     store.dispatch("markVoters22", data)
+}
+
+function addNewHouse(){
+    store.dispatch("addNewHouse")
 }
 
 

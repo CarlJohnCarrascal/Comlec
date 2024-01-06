@@ -1,6 +1,6 @@
 <template>
-    <div class="container-fluid d-none">
-        <div class="row m-2">
+    <div class="container-fluid d-nones">
+        <div class="row m-2 d-none">
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-start border-primary shadow h-100 py-2">
@@ -76,10 +76,36 @@
                 </div>
             </div>
         </div>
+        <div class="row m-4">
+            <div class="card p-0">
+                <div class="card-header m-1 bg-white d-flex gap-2">
+                    <select v-model="store.state.report_filter.city" class="border-01 bg-white1">
+                        <option value="" selected disabled>Choose City</option>
+                        <option v-for="c in store.getters.get_city" :value="c">{{ c }}</option>
+                    </select>
+                    <select v-model="store.state.report_filter.municipality" class="border-01 bg-white1">
+                        <option value="" selected disabled>Choose Municipality</option>
+                        <option v-for="c in store.getters.get_municipality_2(store.state.report_filter.city)" :value="c">{{ c }}</option>
+                    </select>
+                    <select v-model="store.state.report_filter.barangay" class="border-01 bg-white1">
+                        <option value="" selected disabled>Choose Barangay</option>
+                        <option v-for="c in store.getters.get_barangay_2(store.state.report_filter.city, store.state.report_filter.municipality)" :value="c">{{ c }}</option>
+                    </select>
+                </div>
+                <div class="card-body">
+                    <Bar />
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import Bar from '../components/Chart/Bar.vue';
+import { useStore } from 'vuex';
+const store = useStore()
+
 
 </script>
 

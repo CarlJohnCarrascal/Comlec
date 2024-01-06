@@ -582,8 +582,36 @@ const store = createStore({
             search: "",
             view_member_id: "",
         },
+        new_house: {
+            city: "",
+            municipality: "",
+            barangay: "",
+            purok: "",
+            house_number: ""
+        },
+        report_filter: {
+            city: "",
+            municipality: "",
+            barangay: "",
+            chart: {
+                bar: {
+                    data: {
+                        labels: ["Barangay 1", "Barangay 1", "Barangay 1", "Barangay 1"],
+                        datasets: [
+                            { data: [40, 20, 10, 40], backgroundColor: 'lime', label: 'Right'},
+                            { data: [10, 30, 60, 40], backgroundColor: 'red', label: 'Left'},
+                            { data: [20, 20, 0, 5], backgroundColor: 'gray', label: 'Undicided'}
+                        ]
+                    },
+                    options: {
+                        responsive: true
+                    }
+                }
+            }
+        },
     },
     getters: {
+        // #region voters
         get_voters (state){
             let list = state.voters.filter(v => {
                 if(v.city.toLowerCase() == state.filter.city.toLowerCase() && 
@@ -753,6 +781,7 @@ const store = createStore({
                 }
             }))];
         },
+        // #endregion
         // #region Houses
         get_houses (state) {
 
@@ -792,6 +821,7 @@ const store = createStore({
             }))];
             list = list.filter(v => v != undefined)
             if (list[0] == undefined) return []
+            let list3 = [...new Set(list.map(v => { return v.house_number }))]
             let list2 = list.filter(v => v.isHead )
             return [...new Set(list2.map(o => {
                 return {
@@ -801,8 +831,99 @@ const store = createStore({
                     hm: list.filter(v => v.house_number ==  o.house_number).length
                 }
             }))]
+        },
+        check_house_add_member(state){
+            if(state.house_filter.city != "" &&
+                state.house_filter.municipality != "" &&
+                state.house_filter.barangay != "" &&
+                state.house_filter.purok != "") return true
+            else return false
+        },
+        check_house_add_house(state){
+            if(state.house_filter.city != "" &&
+                state.house_filter.municipality != "" &&
+                state.house_filter.barangay != "" &&
+                state.house_filter.purok != "") return true
+            else return false
+        },
+        get_municipality_2(state){
+            return (city) => {
+                return [...new Set( state.voters.map(obj => {
+                    if(obj.city.toLowerCase() == city.toLowerCase()){
+                        return obj.municipality
+                    }
+                }))];
+            }
+        },
+        get_barangay_2 (state) {
+            return (city, municipality) => {
+                return [...new Set( state.voters.map(obj => {
+                    if(obj.city.toLowerCase() == city.toLowerCase() &&
+                    obj.municipality.toLowerCase() == municipality.toLowerCase()){
+                        return obj.barangay
+                    }
+                }))];
+            }
+        },
+        get_purok_2 (state) {
+            return (city, municipality, barangay) => {
+                return [...new Set( state.voters.map(obj => {
+                    if(obj.city.toLowerCase() == city.toLowerCase() &&
+                    obj.municipality.toLowerCase() == municipality.toLowerCase() &&
+                    obj.barangay.toLowerCase() == barangay.toLowerCase()){
+                        return obj.purok
+                    }
+                }))];
+            }
+        },
+        get_house_member (state) {
+            return [...new Set( state.voters.map(obj => {
+                if(obj.city.toLowerCase() == state.house_filter.city.toLowerCase() &&
+                obj.municipality.toLowerCase() == state.house_filter.municipality.toLowerCase() &&
+                obj.barangay.toLowerCase() == state.house_filter.barangay.toLowerCase() &&
+                obj.purok.toLowerCase() == state.house_filter.purok.toLowerCase() &&
+                obj.house_number.toLowerCase() == state.house_filter.house_number.toLowerCase()){
+                    return obj
+                }
+            }))].filter(v => v !== undefined);
+        },
+        // #endregion
+        // #region reports
+        get_bar_chart_report_data (state) {
+            let labels = []
+            let datasets = [
+                { data: [], backgroundColor: 'lime', label: 'Right'},
+                { data: [], backgroundColor: 'red', label: 'Left'},
+                { data: [], backgroundColor: 'gray', label: 'Undecided'}
+            ]
+
+            if(state.report_filter.city !== "" && state.report_filter.municipality == ""){
+                
+                labels = [...new Set( state.voters.map(obj => {
+                    if(obj.city.toLowerCase() == state.report_filter.city.toLowerCase()){
+                        return obj.city
+                    }
+                }))];
+                
+                labels.forEach(l => {
+                    var right = state.voters.filter(v => v.mark.toLowerCase() == 'right' || v.mark.toLowerCase() == 'leader').length
+                    var left = state.voters.filter(v => v.mark.toLowerCase() == 'left').length                   
+                    var undecided = state.voters.filter(v => v.mark.toLowerCase() == 'undecided').length
+                    datasets[0].data.push(right)
+                    datasets[1].data.push(left)
+                    datasets[2].data.push(undecided)
+                })
+                console.log(labels, datasets)
+            }
+            
+            return {
+                labels: labels,
+                datasets: datasets
+            }
         }
-        // ##endrgion
+        // #endregion
+
+
     },
     mutations: {},
     actions: {
@@ -892,6 +1013,12 @@ const store = createStore({
                 state.imported_voters[find].mark = data.type.toUpperCase()
             }
         },
+        // #endregion
+
+        // #region Houses
+        setSelectedHouse ({state}, hn) {
+            state.house_filter.house_number = hn
+        }
         // #endregion
     }
 })
